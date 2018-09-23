@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StudyService } from '../../service/study.service';
 
 @Component({
   selector: 'app-pesquisa',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaComponent implements OnInit {
 
-  constructor() { }
+  constructor(private studyService: StudyService) { }
 
   ngOnInit() {
+    this.studyService.getListAvaliableStudies().then(el => {
+      console.log(el);
+    });
   }
-
 }
