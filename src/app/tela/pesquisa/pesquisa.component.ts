@@ -11,8 +11,6 @@ export class PesquisaComponent implements OnInit {
   constructor(private studyService: StudyService) { }
 
   ngOnInit() {
-    this.studyService.getListAvaliableStudies().then(el => {
-      console.log(el);
-    });
+    this.studyService.getDetailsStudies();
   }
 }

@@ -11,13 +11,17 @@ export class StudyService {
   constructor(private http: AxiosInstance) { }
 
   getListAvaliableStudies () : Promise<void>{
+    console.log("bla");
     return this.http.get("studies").then(res => {
       return res.data.map(id => new Study(id));
     });    
   }
 
-  getListDetailsStudies (studyId){
-    console.log("bla")
-    this.http.get("studies/" + studyId);
+  getDetailsStudies (){
+    this.http.post("tools/find", {
+      Level: "Study",
+      Expand: true,
+      Query: {}
+    });
   }
 }
