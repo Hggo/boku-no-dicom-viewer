@@ -9,22 +9,20 @@
             <th>Study Time</th>
             <th>Study Description</th>
             <th>Number of Series</th>
-            <th>Number of Images</th>
             <th>View</th>
         </tr>
     </thead>
 
     <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let study of studyList; let i = index">
+            <td>{{i}}</td>
+            <td>{{study.institutionName}}</td>
+            <td>{{study.referringPhysicianName}}</td>
+            <td>{{study.studyDate}}</td>
+            <td>{{study.studyTime}}</td>
+            <td>{{study.studyDescription}}</td>
+            <td>{{study.numberSeries}}</td>
+            <td><button>ver</button></td>
         </tr>
     </tbody>
   </table>
