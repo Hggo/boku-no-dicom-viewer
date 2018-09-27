@@ -22,8 +22,12 @@
             <td>{{study.studyTime}}</td>
             <td>{{study.studyDescription}}</td>
             <td>{{study.numberSeries}}</td>
-            <td><button>ver</button></td>
+            <td><button (click)="ngxSmartModalService.getModal('myModal').open()">ver</button></td>
         </tr>
     </tbody>
-  </table>
+  </table>  
 </div>
+
+<ngx-smart-modal #myModal identifier="myModal" customClass="full-modal">
+    <canvas height="2000" width="2000"></canvas>    
+</ngx-smart-modal>

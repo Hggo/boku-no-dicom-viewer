@@ -22,9 +22,11 @@
     "@angular/router": "^6.1.0",
     "axios": "^0.18.0",
     "core-js": "^2.5.4",
+    "ngx-smart-modal": "^7.0.3",
     "pure-css": "^1.0.4",
     "purecss": "^1.0.0",
     "rxjs": "~6.2.0",
+    "web-animations-js": "^2.3.1",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {

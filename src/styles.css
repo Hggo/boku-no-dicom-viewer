@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+.full-modal {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    max-height: 100% !important;
+}
+
+.full-modal > .nsm-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0px !important;
+    height: 100% !important;
+    max-height: 100% !important;
+}

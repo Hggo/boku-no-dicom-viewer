@@ -6,6 +6,8 @@ import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
 
 import axios from 'axios'
 import { StudyService } from './service/study.service';
+import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +30,10 @@ const instance = axios.create({
     PesquisaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    NgxSmartModalModule.forRoot()
   ],
-  providers: [ {provide: Http, useValue: instance}, {provide: StudyService, useValue: new StudyService(instance)} ], 
+  providers: [ {provide: Http, useValue: instance}, {provide: StudyService, useValue: new StudyService(instance)}, NgxSmartModalService ], 
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
