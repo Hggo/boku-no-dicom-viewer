@@ -1,5 +1,8 @@
+import Instance from "./Instance";
+
 export default class Study {
 
+    private _id: String;
     private _institutionName: String;
     private _referringPhysicianName: String;
     private _studyDate: String;
@@ -8,8 +11,12 @@ export default class Study {
     private _studyTime: String;
     private _numberSeries: Number;
     private _patientName: String;
+    private _instances: Instance[];
 
     constructor(study) {
+
+        this._id = study.ID; 
+
         if (study.MainDicomTags != undefined) {
             this._institutionName = study.MainDicomTags.InstitutionName;
             this._referringPhysicianName = study.MainDicomTags.ReferringPhysicianName;
@@ -26,6 +33,10 @@ export default class Study {
         if (study.PatientMainDicomTags) {
             this._patientName = study.PatientMainDicomTags.PatientName;
         }
+    }
+
+    get id(): String {
+        return this._id;
     }
 
     get institutionName(): String {
@@ -90,5 +101,13 @@ export default class Study {
 
     set patientName(patientName: String) {
         this._patientName = patientName;
+    }
+
+    get instances(): Instance[] {
+        return this._instances;
+    }
+
+    set instances(instances: Instance[]) {
+        this._instances = instances;
     }
 }
