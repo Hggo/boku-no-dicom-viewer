@@ -1,0 +1,12 @@
+version: '3'
+services:
+    node_server:
+        image: hggo/node_cli
+        container_name: node_server
+        stdin_open: true
+        tty: true
+        command: "/bin/bash"
+        ports:
+            - "4200:4200"
+        volumes:
+#            - [pathhost]:/tmp
