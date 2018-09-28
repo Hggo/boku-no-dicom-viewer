@@ -1,4 +1,5 @@
 import Instance from "./Instance";
+import { StudyOrth } from "src/app/interface/StudyOrth";
 
 export default class Study {
 
@@ -13,8 +14,14 @@ export default class Study {
     private _patientName: String;
     private _instances: Instance[];
 
-    constructor(study) {
+    constructor(study: StudyOrth = undefined) {
+        if(study) {
+            this.copyProperties(study);
+        }
+    }
 
+    private copyProperties(study: StudyOrth){
+        
         this._id = study.ID; 
 
         if (study.MainDicomTags != undefined) {

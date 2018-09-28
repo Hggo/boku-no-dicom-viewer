@@ -1,10 +1,18 @@
+import { InstanceOrth } from "src/app/interface/InstanceOrth";
+
 export default class Instance {
 
     private _indexInSeries: Number;
     private _id: String;
     private _pixelData: ArrayBuffer;
 
-    constructor(instance){
+    constructor(instance: InstanceOrth = undefined){
+        if(instance){
+            this.copyProperties(instance);
+        }
+    }
+
+    private copyProperties(instance: InstanceOrth){
         this._indexInSeries = instance.IndexInSeries;
         this._id = instance.ID;
     }
