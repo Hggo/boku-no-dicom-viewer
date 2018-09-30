@@ -24,7 +24,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "node_modules/ngx-smart-modal/ngx-smart-modal.css"
+              "node_modules/ngx-smart-modal/ngx-smart-modal.css",
+              "node_modules/purecss/build/pure-min.css"
             ],
             "scripts": []
           },

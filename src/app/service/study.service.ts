@@ -23,14 +23,15 @@ export class StudyService {
     return this.http.post("tools/find", {
                           Level: "Instance",
                           Expand: true,
-                          Query: {'StudyId': study.id}})
+                          Query: {'StudyInstanceUID': study.studyInstanceUID}})
                     .then(res => res.data.map(instance => new Instance(instance)));
   }
 
   getPixelData(instance: Instance) : Promise<Instance> {
-    return this.http.get("/instances/" + instance.id + "/tags")
+    return this.http.get("/instances/" + instance.id + "/frames/0/raw",  {
+      responseType: 'arraybuffer'})
                     .then(res => { 
-                      instance.pixelData = res.data;
+                      instance.pixelData = new Uint8Array(res.data);
                       return instance;
                     });
   }

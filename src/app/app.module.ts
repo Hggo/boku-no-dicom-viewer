@@ -7,6 +7,7 @@ import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
 import axios from 'axios'
 import { StudyService } from './service/study.service';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
+import { ViewportComponent } from './viewer/viewport/viewport.component';
 
 
 @Injectable({
@@ -27,7 +28,8 @@ const instance = axios.create({
 @NgModule({
   declarations: [
     AppComponent,
-    PesquisaComponent
+    PesquisaComponent,
+    ViewportComponent
   ],
   imports: [
     BrowserModule,

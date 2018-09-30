@@ -22,12 +22,12 @@
             <td>{{study.studyTime}}</td>
             <td>{{study.studyDescription}}</td>
             <td>{{study.numberSeries}}</td>
-            <td><button (click)="ngxSmartModalService.getModal('myModal').open()">ver</button></td>
+            <td><button (click)="viewStudy(study)">ver</button></td>
         </tr>
     </tbody>
   </table>  
 </div>
 
 <ngx-smart-modal #myModal identifier="myModal" customClass="full-modal">
-    <canvas height="2000" width="2000"></canvas>    
+    <app-viewport *ngIf="myModal.hasData()" [study]="myModal.getData()" ></app-viewport>
 </ngx-smart-modal>

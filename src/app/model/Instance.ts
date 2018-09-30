@@ -4,7 +4,7 @@ export default class Instance {
 
     private _indexInSeries: Number;
     private _id: String;
-    private _pixelData: ArrayBuffer;
+    private _pixelData: Uint8Array;
 
     constructor(instance: InstanceOrth = undefined){
         if(instance){
@@ -33,11 +33,11 @@ export default class Instance {
         this._indexInSeries = indexInSeries;
     }
 
-    get pixelData(): ArrayBuffer {
+    get pixelData(): Uint8Array {
         return this._pixelData;
     }
 
-    set pixelData(pixelData: ArrayBuffer) {
+    set pixelData(pixelData: Uint8Array) {
         this._pixelData = pixelData;
     }
 }
