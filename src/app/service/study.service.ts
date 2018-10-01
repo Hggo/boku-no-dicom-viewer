@@ -3,6 +3,7 @@ import { Http } from '../app.module';
 import { AxiosInstance } from 'axios';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
+import { TagsOrth } from '../interface/TagsOrth';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,13 @@ export class StudyService {
                           Expand: true,
                           Query: {'StudyInstanceUID': study.studyInstanceUID}})
                     .then(res => res.data.map(instance => new Instance(instance)));
+  }
+
+  getTags(instance: Instance) : Promise<Instance> {
+    return this.http.get("/instances/" + instance.id + "/tags").then(res => {
+      instance.tags = res.data;
+      return instance;
+    });
   }
 
   getPixelData(instance: Instance) : Promise<Instance> {

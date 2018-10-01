@@ -1,10 +1,12 @@
 import { InstanceOrth } from "src/app/interface/InstanceOrth";
+import { TagsOrth } from "../interface/TagsOrth";
 
 export default class Instance {
 
     private _indexInSeries: Number;
     private _id: String;
     private _pixelData: Uint8Array;
+    private _tags: TagsOrth;
 
     constructor(instance: InstanceOrth = undefined){
         if(instance){
@@ -39,5 +41,13 @@ export default class Instance {
 
     set pixelData(pixelData: Uint8Array) {
         this._pixelData = pixelData;
+    }
+
+    get tags(): TagsOrth {
+        return this._tags;
+    }
+
+    set tags(tags: TagsOrth) {
+        this._tags = tags;
     }
 }
