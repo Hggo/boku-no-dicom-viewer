@@ -63,11 +63,11 @@ export class ViewportComponent implements OnInit {
     this.mouseListener.listen();
   }
 
-  private treatWindow(deltaX: number, deltaY: number){
+  private treatWindow = function(deltaX: number, deltaY: number){
     this.instance.ww += (deltaX / 1);
     this.instance.wc += (deltaY / 1);
     this.draw();
-  }
+  }.bind(this);
 
   private draw() {
 
