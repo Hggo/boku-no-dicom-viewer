@@ -7,6 +7,11 @@ export default class Instance {
     private _id: String;
     private _pixelData: Uint8Array;
     private _tags: TagsOrth;
+    private _ww: number;
+    private _wc: number;
+
+    private _cols: number;
+    private _rows: number;
 
     constructor(instance: InstanceOrth = undefined){
         if(instance){
@@ -49,5 +54,46 @@ export default class Instance {
 
     set tags(tags: TagsOrth) {
         this._tags = tags;
+        this.initTags();
+    }
+
+    get ww(): number {
+        return this._ww;
+    }
+
+    set ww(ww: number) {
+        this._ww = ww;
+    }
+
+    get wc(): number {
+        return this._wc;
+    }
+
+    set wc(wc: number) {
+        this._wc = wc;
+    }
+
+    get rows(): number {
+        return this._rows;
+    }
+
+    set rows(rows: number) {
+        this._rows = rows;
+    }
+
+    get cols(): number {
+        return this._cols;
+    }
+
+    set cols(cols: number) {
+        this._cols = cols;
+    }
+    
+    private initTags(){
+        this.ww = Number(this.tags["0028,1051"].Value);
+        this.wc = Number(this.tags["0028,1050"].Value);
+
+        this.cols = Number(this.tags["0028,0011"].Value);
+        this.rows = Number(this.tags["0028,0010"].Value);
     }
 }

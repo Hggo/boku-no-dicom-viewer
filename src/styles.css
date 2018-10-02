@@ -3,6 +3,7 @@
     max-width: 100% !important;
     height: 100% !important;
     max-height: 100% !important;
+    overflow: hidden;
 }
 
 .full-modal > .nsm-content {
@@ -11,4 +12,6 @@
     margin: 0px !important;
     height: 100% !important;
     max-height: 100% !important;
+    background-color: black;
+    overflow: hidden;
 }
