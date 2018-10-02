@@ -13,13 +13,18 @@ export default class Instance {
     private _cols: number;
     private _rows: number;
 
-    constructor(instance: InstanceOrth = undefined){
-        if(instance){
+    private _rescaleSlope: number;
+    private _rescaleIntercept: number;
+
+    private _hasWindow: Boolean;
+
+    constructor(instance: InstanceOrth = undefined) {
+        if (instance) {
             this.copyProperties(instance);
         }
     }
 
-    private copyProperties(instance: InstanceOrth){
+    private copyProperties(instance: InstanceOrth) {
         this._indexInSeries = instance.IndexInSeries;
         this._id = instance.ID;
     }
@@ -88,10 +93,57 @@ export default class Instance {
     set cols(cols: number) {
         this._cols = cols;
     }
-    
-    private initTags(){
-        this.ww = Number(this.tags["0028,1051"].Value);
-        this.wc = Number(this.tags["0028,1050"].Value);
+
+    get hasWindow(): Boolean {
+        return this._hasWindow;
+    }
+
+    set hasWindow(hasWindow: Boolean) {
+        this._hasWindow = hasWindow;
+    }
+
+    get rescaleSlope(): number {
+        return this._rescaleSlope;
+    }
+
+    set rescaleSlope(slope: number) {
+        this._rescaleSlope = slope;
+    }
+
+    get rescaleIntercept(): number {
+        return this._rescaleIntercept;
+    }
+
+    set rescaleIntercept(intercept: number) {
+        this._rescaleIntercept = intercept;
+    }
+
+    private initTags() {
+
+        try {
+            this.ww = Number(this.tags["0028,1051"].Value);
+            this.wc = Number(this.tags["0028,1050"].Value);
+
+            this.hasWindow = true;
+        } catch (err) {
+
+            try {
+                this.ww = Number(this.tags["5200,9229"].Value[0]["0028,9132"].Value[0]["0028,1051"].Value);
+                this.wc = Number(this.tags["5200,9229"].Value[0]["0028,9132"].Value[0]["0028,1050"].Value);
+                this.hasWindow = true;
+            } catch (errr) {
+                this.hasWindow = false;
+            }
+        }
+
+        try {
+            this.rescaleIntercept = Number(this.tags["5200,9229"].Value[0]["0028,9145"].Value[0]["0028,1052"].Value);
+            this.rescaleSlope = Number(this.tags["5200,9229"].Value[0]["0028,9145"].Value[0]["0028,1053"].Value);
+        } catch (err) {
+            this.rescaleSlope = 1;
+            this.rescaleIntercept = 0;
+        }
+
 
         this.cols = Number(this.tags["0028,0011"].Value);
         this.rows = Number(this.tags["0028,0010"].Value);

@@ -24,8 +24,8 @@ export class CanvasImageData {
 
         for (var index = 0; index < this._pixelDataUInt.length; index++) {
 
-            let lum = this.applyWindow(this._pixelDataUInt[index], instance.ww, instance.wc);
-
+            let lum = this.applyWindowIfExistent(this.applyRescale(this._pixelDataUInt[index]), instance.ww, instance.wc);
+        
             lum = this.applyPhotometricInterpretation(lum);
 
             this._imageData.data[counter++] = lum;
@@ -40,6 +40,18 @@ export class CanvasImageData {
             return 255 - pixel;
         else
             return pixel;
+    }
+
+    private applyWindowIfExistent(x, w, c){
+        if(this.instance.hasWindow){
+            return this.applyWindow(x, w, c);
+        } 
+
+        return x;
+    }
+
+    private applyRescale (x): number{
+        return x * this.instance.rescaleSlope + this.instance.rescaleIntercept;
     }
 
     private applyWindow(x, w, c) {
