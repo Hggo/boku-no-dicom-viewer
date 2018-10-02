@@ -39,7 +39,7 @@ export class StudyService {
     return this.http.get("/instances/" + instance.id + "/frames/0/raw",  {
       responseType: 'arraybuffer'})
                     .then(res => { 
-                      instance.pixelData = new Uint8Array(res.data);
+                      instance.pixelData = res.data;
                       return instance;
                     });
   }

@@ -5,7 +5,7 @@ export default class Instance {
 
     private _indexInSeries: Number;
     private _id: String;
-    private _pixelData: Uint8Array;
+    private _pixelData: ArrayBuffer;
     private _tags: TagsOrth;
     private _ww: number;
     private _wc: number;
@@ -40,11 +40,11 @@ export default class Instance {
         this._indexInSeries = indexInSeries;
     }
 
-    get pixelData(): Uint8Array {
+    get pixelData(): ArrayBuffer {
         return this._pixelData;
     }
 
-    set pixelData(pixelData: Uint8Array) {
+    set pixelData(pixelData: ArrayBuffer) {
         this._pixelData = pixelData;
     }
 

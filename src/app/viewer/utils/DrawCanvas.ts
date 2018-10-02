@@ -6,7 +6,7 @@ export class DrawCanvas {
     public static drawAnnotations(ctx: CanvasRenderingContext2D, instance: Instance) {
 
         ctx.font = "12px Arial";
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "yellow";
         ctx.fillText("WW", instance.cols - 70, instance.rows - 60);
         ctx.fillText(instance.ww.toString(), instance.cols - 45, instance.rows - 60);
 
@@ -15,8 +15,7 @@ export class DrawCanvas {
     }
 
     public static drawPixelData(ctx: CanvasRenderingContext2D, instance: Instance) {
-
-        let imddt = new CanvasImageData(instance.cols, instance.rows, ctx, instance.pixelData, instance.ww, instance.wc);
+        let imddt = new CanvasImageData(instance, ctx);
         ctx.putImageData(imddt.imageData, 0, 0);
     }
 
