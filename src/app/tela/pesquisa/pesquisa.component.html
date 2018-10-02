@@ -28,6 +28,6 @@
   </table>  
 </div>
 
-<ngx-smart-modal #myModal identifier="myModal" customClass="full-modal">
+<ngx-smart-modal #myModal identifier="myModal" customClass="full-modal" (onClose)="myModal.removeData()" (onDismiss)="myModal.removeData()">
     <app-viewport *ngIf="myModal.hasData()" [study]="myModal.getData()" ></app-viewport>
 </ngx-smart-modal>
