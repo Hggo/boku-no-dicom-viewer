@@ -1,7 +1,7 @@
 version: '3'
 services:
     node_server:
-        image: hggo/node_cli
+        image: hugorgs/node_cli
         container_name: node_server
         stdin_open: true
         tty: true
@@ -9,4 +9,11 @@ services:
         ports:
             - "4200:4200"
         volumes:
-#            - [pathhost]:/tmp
+            - ${PROJECT_FOLDER}:/tmp
+    orthanc:
+        image: jodogne/orthanc-plugins
+        ports:
+            - "8042:8042"
+        volumes: 
+            - ${PROJECT_FOLDER}orthanc.json:/etc/orthanc/orthanc.json:ro
+            - ${PROJECT_FOLDER}dist/boku-no-dicom-viewer/:/home/bndv/
