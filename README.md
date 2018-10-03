@@ -4,6 +4,22 @@ This viewer consumes Orthanc rest api, it may be necessary to run it in serve fo
 
 http://book.orthanc-server.com/faq/same-origin.html
 
+# Run it together with an Orthanc instance on Docker
+
+ In this method there should be no CORS problems
+
+ 1. Update the .env file located in the project root folder with the absolute path of this project in your machine
+ 
+ 2. npm i -g  @angular/cli 
+ 
+ 3. npm i
+ 
+ 4. ng b
+ 
+ 5. docker-compose up -d
+ 
+ 6. Navigate to `http://localhost:8042/bndv/index.html`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
