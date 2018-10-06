@@ -5,6 +5,7 @@ import Instance from '../../model/Instance';
 import { CanvasImageData } from '../../model/CanvasImageData';
 import { DrawCanvas } from '../utils/DrawCanvas';
 import { MouseListener } from '../utils/MouseListener';
+import * as THREE from 'three';
 
 @Component({
   selector: 'app-viewport',
@@ -13,9 +14,10 @@ import { MouseListener } from '../utils/MouseListener';
 })
 export class ViewportComponent {
 
+  private webglDiv: HTMLDivElement;
   @Input() study: Study;
 
-  private canvas: HTMLCanvasElement;
+  private renderer: THREE.WebGLRenderer;
   private instance: Instance;
   private ctx: CanvasRenderingContext2D;
   private mouseListener: MouseListener;
@@ -50,10 +52,9 @@ export class ViewportComponent {
   }
 
   private initCanvas() {
-    this.canvas = <HTMLCanvasElement>document.getElementById("canvas");
-    this.ctx = this.canvas.getContext("2d");
+    this.webglDiv = <HTMLDivElement>document.getElementById("webgl");
 
-    this.mouseListener = new MouseListener(this.canvas, this.treatWindow);
+    this.mouseListener = new MouseListener(this.webglDiv, this.treatWindow);
 
     this.draw();
     this.mouseListener.listen();
@@ -69,8 +70,8 @@ export class ViewportComponent {
 
     this.instance = this.study.instances[0];
 
-    DrawCanvas.initCanvas(this.ctx, this.canvas);
-    DrawCanvas.drawPixelData(this.ctx, this.instance);
-    DrawCanvas.drawAnnotations(this.ctx, this.instance);
+    this.renderer = DrawCanvas.initRenderer(this.webglDiv);
+    DrawCanvas.drawPixelData(this.renderer, this.instance);
+    DrawCanvas.drawAnnotations(this.renderer, this.instance);
   }
 }
