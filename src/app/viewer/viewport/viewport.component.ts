@@ -11,7 +11,7 @@ import { MouseListener } from '../utils/MouseListener';
   templateUrl: './viewport.component.html',
   styleUrls: ['./viewport.component.css']
 })
-export class ViewportComponent implements OnInit {
+export class ViewportComponent {
 
   @Input() study: Study;
 
@@ -21,10 +21,6 @@ export class ViewportComponent implements OnInit {
   private mouseListener: MouseListener;
 
   constructor(private studyService: StudyService) {}
-
-  ngOnInit() {
-
-  }
 
   ngOnChanges() {
     this.studyService.getInstancesFromStudy(this.study)
