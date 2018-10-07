@@ -2,12 +2,11 @@ import Instance from "./Instance";
 
 export class CanvasImageData {
 
-    private _imageData: ImageData;
     private _pixelDataUInt;
+    private _pixelData;
 
-    constructor(private instance: Instance, private canvasContext: CanvasRenderingContext2D) {
-        this._imageData = canvasContext.createImageData(instance.cols, instance.rows);
-
+    constructor(private instance: Instance) {
+    
         let counter = 0;
         let pixelRepresentation = instance.tags["0028,0103"].Value;
         let bitsAlocated = instance.tags["0028,0100"].Value;
@@ -22,16 +21,18 @@ export class CanvasImageData {
             this._pixelDataUInt = new Int16Array(instance.pixelData);
         }
 
+        this._pixelData = new Uint8Array(instance.cols * instance.rows * 4);
+
         for (var index = 0; index < this._pixelDataUInt.length; index++) {
 
             let lum = this.applyWindowIfExistent(this.applyRescale(this._pixelDataUInt[index]), instance.ww, instance.wc);
         
             lum = this.applyPhotometricInterpretation(lum);
 
-            this._imageData.data[counter++] = lum;
-            this._imageData.data[counter++] = lum;
-            this._imageData.data[counter++] = lum;
-            this._imageData.data[counter++] = 255;
+            this._pixelData[counter++] = lum;
+            this._pixelData[counter++] = lum;
+            this._pixelData[counter++] = lum;
+            this._pixelData[counter++] = 255;
         }
     }
 
@@ -71,6 +72,6 @@ export class CanvasImageData {
     }
 
     get imageData() {
-        return this._imageData;
+        return this._pixelData;
     }
 }

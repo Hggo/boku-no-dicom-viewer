@@ -1,6 +1,7 @@
 import Instance from "../../model/Instance";
 import { CanvasImageData } from "../../model/CanvasImageData";
 import * as THREE from 'three';
+import { DicomViewer } from "../../objects/DicomViewer";
 
 export class DrawCanvas {
 
@@ -8,14 +9,11 @@ export class DrawCanvas {
         throw new Error('Not implemented');
     }
 
-    public static drawPixelData(ctx: CanvasRenderingContext2D, instance: Instance) {
-        throw new Error('Not implemented');
-    }
+    public static drawPixelData(dicomViewer: DicomViewer, instance: Instance) {
+        let ima = (new CanvasImageData(instance)).imageData;
+        var texture = new THREE.DataTexture(ima, instance.cols, instance.rows, THREE.RGBAFormat);
+        texture.needsUpdate = true;
 
-    public static initRenderer (webglDiv: HTMLDivElement): THREE.WebGLRenderer{
-        let renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        webglDiv.appendChild(renderer.domElement)
-        return renderer;
+        dicomViewer.initViewer(instance, texture);
     }
 }

@@ -6,6 +6,7 @@ import { CanvasImageData } from '../../model/CanvasImageData';
 import { DrawCanvas } from '../utils/DrawCanvas';
 import { MouseListener } from '../utils/MouseListener';
 import * as THREE from 'three';
+import { DicomViewer } from '../../objects/DicomViewer';
 
 @Component({
   selector: 'app-viewport',
@@ -14,6 +15,7 @@ import * as THREE from 'three';
 })
 export class ViewportComponent {
 
+  dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
   @Input() study: Study;
 
@@ -54,6 +56,7 @@ export class ViewportComponent {
   private initCanvas() {
     this.webglDiv = <HTMLDivElement>document.getElementById("webgl");
 
+    this.dicomViewer = new DicomViewer(this.webglDiv);
     this.mouseListener = new MouseListener(this.webglDiv, this.treatWindow);
 
     this.draw();
@@ -70,8 +73,7 @@ export class ViewportComponent {
 
     this.instance = this.study.instances[0];
 
-    this.renderer = DrawCanvas.initRenderer(this.webglDiv);
-    DrawCanvas.drawPixelData(this.renderer, this.instance);
+    DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
     DrawCanvas.drawAnnotations(this.renderer, this.instance);
   }
 }
