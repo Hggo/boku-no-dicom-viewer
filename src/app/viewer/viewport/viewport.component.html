@@ -1,1 +1,22 @@
-<canvas id="canvas" height="500" width="500"></canvas>
+<div id="viewport">
+
+    <div id="topToolbox" style="height:10% !important">
+            
+    </div>
+
+    <div id="leftToolbox">
+
+    </div>
+
+    <div id="webgl">
+        <div *ngIf="instance != null">
+            <div class="unselectable tag-ww">
+                ww {{ instance.ww }}
+            </div>
+
+            <div class="unselectable tag-wc">
+                wc {{ instance.wc }}
+            </div>
+        </div>
+    </div>
+</div>

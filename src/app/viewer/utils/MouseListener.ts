@@ -3,12 +3,12 @@ export class MouseListener {
     private lastX: number;
     private lastY: number;
 
-    constructor(private canvas: HTMLCanvasElement, private tratar: Function) {
+    constructor(private renderer: HTMLDivElement, private tratar: Function) {
 
     }
 
     public listen() {
-        this.canvas.addEventListener('mousedown', function (e) {
+        this.renderer.addEventListener('mousedown', function (e) {
             this.lastX = e.pageX;
             this.lastY = e.pageY;
 
@@ -17,13 +17,13 @@ export class MouseListener {
     }
 
     handle_keydown = function (e) {
-        this.canvas.addEventListener('mousemove', this.mouseMoveHandler);
-        this.canvas.addEventListener('mouseup', this.mouseUpHandler);
+        this.renderer.addEventListener('mousemove', this.mouseMoveHandler);
+        this.renderer.addEventListener('mouseup', this.mouseUpHandler);
     }.bind(this);
 
     mouseUpHandler = function (e) {
-        this.canvas.removeEventListener('mousemove', this.mouseMoveHandler);
-        this.canvas.removeEventListener('mouseup', this.mouseUpHandler);
+        this.renderer.removeEventListener('mousemove', this.mouseMoveHandler);
+        this.renderer.removeEventListener('mouseup', this.mouseUpHandler);
     }.bind(this);
 
     mouseMoveHandler = function (e) {

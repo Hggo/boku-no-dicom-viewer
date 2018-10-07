@@ -1,5 +1,52 @@
-canvas{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#viewport {
+    position: absolute !important;
+    height: 100% !important;
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0px !important;
+    margin: 0px !important;
+    background-color: black;
+}
+
+#topToolbox {
+    height: 50px !important;
+    width: 100% !important;
+    float: both;
+    background-color: darkslategrey;
+}
+
+#leftToolbox {
+    height: 100%;
+    width: 10%;
+    float: left;
+    background-color: darkslategrey;
+}
+
+#webgl {
+    height: 90%;
+    width: 90%;
+    float: right;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tag-ww {
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    color: yellow;
+}
+
+.tag-wc {
+    position: absolute;
+    right: 50px;
+    bottom: 30px;
+    color: yellow;
 }
