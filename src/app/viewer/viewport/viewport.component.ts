@@ -15,12 +15,12 @@ import { DicomViewer } from '../../objects/DicomViewer';
 })
 export class ViewportComponent {
 
-  dicomViewer: DicomViewer;
+  private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
   @Input() study: Study;
 
   private renderer: THREE.WebGLRenderer;
-  private instance: Instance;
+  public instance: Instance;
   private ctx: CanvasRenderingContext2D;
   private mouseListener: MouseListener;
 
@@ -74,6 +74,5 @@ export class ViewportComponent {
     this.instance = this.study.instances[0];
 
     DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
-    DrawCanvas.drawAnnotations(this.renderer, this.instance);
   }
 }

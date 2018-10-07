@@ -5,6 +5,7 @@
     width: 100% !important;
     padding: 0px !important;
     margin: 0px !important;
+    background-color: black;
 }
 
 #topToolbox {
@@ -27,9 +28,25 @@
     float: right;
 }
 
-tag {
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.tag-ww {
     position: absolute;
-    right: 100px;
-    bottom: 100px;
+    right: 50px;
+    bottom: 50px;
+    color: yellow;
+}
+
+.tag-wc {
+    position: absolute;
+    right: 50px;
+    bottom: 30px;
     color: yellow;
 }

@@ -1,10 +1,10 @@
 import * as THREE from 'three';
 import Instance from '../model/Instance';
 
-export class DicomViewer{
+export class DicomViewer {
 
-    width: number;
-    height: number;
+    private width: number;
+    private height: number;
     private plane: any;
     private camera: THREE.PerspectiveCamera;
     private renderer: THREE.WebGLRenderer;
@@ -34,7 +34,7 @@ export class DicomViewer{
         this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, 0.1, 1000);
         this.camera.position.x = 0;
         this.camera.position.y = 0;    
-        this.camera.position.z = this.height / 2 * Math.tan( (this.fov/2)  * (Math.PI/180)  )
+        this.camera.position.z = this.height * 2 / 2 * Math.tan( (this.fov/2)  * (Math.PI/180))
     }
 
     public initViewer(instance: Instance, texture: THREE.Texture){

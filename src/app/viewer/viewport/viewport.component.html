@@ -9,6 +9,14 @@
     </div>
 
     <div id="webgl">
-        
+        <div *ngIf="instance != null">
+            <div class="unselectable tag-ww">
+                ww {{ instance.ww }}
+            </div>
+
+            <div class="unselectable tag-wc">
+                wc {{ instance.wc }}
+            </div>
+        </div>
     </div>
 </div>
