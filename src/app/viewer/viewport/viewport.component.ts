@@ -41,7 +41,7 @@ export class ViewportComponent implements OnChanges {
 
     if (instances && instances.length > 0) {
       this.study.instances = instances;
-      this.study.instances.forEach(instance => this.resolvePixelData(instance));
+      this.resolvePixelData(this.study.instances[0]);
     }
   }
 
