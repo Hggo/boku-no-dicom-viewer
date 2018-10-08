@@ -10,7 +10,7 @@ export class DicomViewer {
     private renderer: THREE.WebGLRenderer;
     private scene: THREE.Scene;
     private fov: number;
-    
+
     constructor(private webglDiv: HTMLDivElement){
         this.initRenderer();
         this.createScene();
@@ -25,29 +25,29 @@ export class DicomViewer {
         this.webglDiv.appendChild(this.renderer.domElement)
     }
 
-    private createScene(){
+    private createScene() {
         this.scene = new THREE.Scene();
     }
 
-    private initCamera(){
+    private initCamera(instance: Instance) {
         this.fov = 75;
         this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, 0.1, 1000);
         this.camera.position.x = 0;
-        this.camera.position.y = 0;    
-        this.camera.position.z = this.height * 2 / 2 * Math.tan( (this.fov/2)  * (Math.PI/180))
+        this.camera.position.y = 0;
+        this.camera.position.z = instance.rows / ( 2 * Math.tan( this.camera.fov * Math.PI / 360));
     }
 
-    public initViewer(instance: Instance, texture: THREE.Texture){
-        
-        if(!this.camera) {
-            this.initCamera();
+    public initViewer(instance: Instance, texture: THREE.Texture) {
+
+        if (!this.camera) {
+            this.initCamera(instance);
         }
 
         this.plane = new THREE.PlaneGeometry(instance.cols, instance.rows);
-        var material = new THREE.MeshBasicMaterial( { map: texture } );
-            
+        const material = new THREE.MeshBasicMaterial( { map: texture } );
+
         material.needsUpdate = true;
-		texture.needsUpdate = true;
+        texture.needsUpdate = true;
         const mesh = new THREE.Mesh(this.plane, material);
         mesh.scale.y = -1;
 
