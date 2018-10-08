@@ -19,8 +19,8 @@ export class PesquisaComponent implements OnInit {
     this.studyService.getDetailsStudies().then(el => this.studyList = el);
   }
 
-  viewStudy(study: Study){
+  viewStudy(study: Study) {
     this.ngxSmartModalService.setModalData(study, 'myModal');
-    this.ngxSmartModalService.getModal('myModal').open()
+    this.ngxSmartModalService.getModal('myModal').open();
   }
 }

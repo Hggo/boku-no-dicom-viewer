@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import Study from '../../model/Study';
 import { StudyService } from '../../service/study.service';
 import Instance from '../../model/Instance';
@@ -13,7 +13,9 @@ import { DicomViewer } from '../../objects/DicomViewer';
   templateUrl: './viewport.component.html',
   styleUrls: ['./viewport.component.css']
 })
-export class ViewportComponent {
+export class ViewportComponent implements OnChanges {
+
+  constructor(private studyService: StudyService) {}
 
   private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
@@ -24,7 +26,11 @@ export class ViewportComponent {
   private ctx: CanvasRenderingContext2D;
   private mouseListener: MouseListener;
 
-  constructor(private studyService: StudyService) {}
+  private treatWindow = function(deltaX: number, deltaY: number) {
+    this.instance.ww += (deltaX / 1);
+    this.instance.wc += (deltaY / 1);
+    this.draw();
+  }.bind(this);
 
   ngOnChanges() {
     this.studyService.getInstancesFromStudy(this.study)
@@ -50,11 +56,11 @@ export class ViewportComponent {
     this.studyService.getTags(instance).then(insttags => {
       instance = insttags;
       this.initCanvas();
-    });;
+    });
   }
 
   private initCanvas() {
-    this.webglDiv = <HTMLDivElement>document.getElementById("webgl");
+    this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
 
     this.dicomViewer = new DicomViewer(this.webglDiv);
     this.mouseListener = new MouseListener(this.webglDiv, this.treatWindow);
@@ -62,12 +68,6 @@ export class ViewportComponent {
     this.draw();
     this.mouseListener.listen();
   }
-
-  private treatWindow = function(deltaX: number, deltaY: number){
-    this.instance.ww += (deltaX / 1);
-    this.instance.wc += (deltaY / 1);
-    this.draw();
-  }.bind(this);
 
   private draw() {
 

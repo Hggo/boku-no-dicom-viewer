@@ -13,32 +13,32 @@ export class StudyService {
   constructor(private http: AxiosInstance) { }
 
   getDetailsStudies(): Promise<Study[]> {
-    return this.http.post("tools/find", {
-                          Level: "Study",
+    return this.http.post('tools/find', {
+                          Level: 'Study',
                           Expand: true,
                           Query: {}})
                     .then(res => res.data.map(study => new Study(study)));
   }
 
-  getInstancesFromStudy(study: Study) : Promise<Instance[]> {
-    return this.http.post("tools/find", {
-                          Level: "Instance",
+  getInstancesFromStudy(study: Study): Promise<Instance[]> {
+    return this.http.post('tools/find', {
+                          Level: 'Instance',
                           Expand: true,
                           Query: {'StudyInstanceUID': study.studyInstanceUID}})
                     .then(res => res.data.map(instance => new Instance(instance)));
   }
 
-  getTags(instance: Instance) : Promise<Instance> {
-    return this.http.get("/instances/" + instance.id + "/tags").then(res => {
+  getTags(instance: Instance): Promise<Instance> {
+    return this.http.get('/instances/' + instance.id + '/tags').then(res => {
       instance.tags = res.data;
       return instance;
     });
   }
 
-  getPixelData(instance: Instance) : Promise<Instance> {
-    return this.http.get("/instances/" + instance.id + "/frames/0/raw",  {
+  getPixelData(instance: Instance): Promise<Instance> {
+    return this.http.get('/instances/' + instance.id + '/frames/0/raw',  {
       responseType: 'arraybuffer'})
-                    .then(res => { 
+                    .then(res => {
                       instance.pixelData = res.data;
                       return instance;
                     });

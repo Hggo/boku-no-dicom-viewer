@@ -1,20 +1,11 @@
 export class MouseListener {
 
-    private lastX: number;
-    private lastY: number;
-
     constructor(private renderer: HTMLDivElement, private tratar: Function) {
 
     }
 
-    public listen() {
-        this.renderer.addEventListener('mousedown', function (e) {
-            this.lastX = e.pageX;
-            this.lastY = e.pageY;
-
-            this.handle_keydown(e);
-        }.bind(this));
-    }
+    private lastX: number;
+    private lastY: number;
 
     handle_keydown = function (e) {
         this.renderer.addEventListener('mousemove', this.mouseMoveHandler);
@@ -34,4 +25,13 @@ export class MouseListener {
 
         this.tratar(deltaX, deltaX);
     }.bind(this);
+
+    public listen() {
+        this.renderer.addEventListener('mousedown', function (e) {
+            this.lastX = e.pageX;
+            this.lastY = e.pageY;
+
+            this.handle_keydown(e);
+        }.bind(this));
+    }
 }

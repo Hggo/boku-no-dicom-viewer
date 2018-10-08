@@ -11,7 +11,7 @@ export class DicomViewer {
     private scene: THREE.Scene;
     private fov: number;
 
-    constructor(private webglDiv: HTMLDivElement){
+    constructor(private webglDiv: HTMLDivElement) {
         this.initRenderer();
         this.createScene();
     }
@@ -22,7 +22,7 @@ export class DicomViewer {
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(this.width, this.height);
-        this.webglDiv.appendChild(this.renderer.domElement)
+        this.webglDiv.appendChild(this.renderer.domElement);
     }
 
     private createScene() {

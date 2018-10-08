@@ -1,5 +1,5 @@
-import Instance from "./Instance";
-import { StudyOrth } from "src/app/interface/StudyOrth";
+import Instance from './Instance';
+import { StudyOrth } from 'src/app/interface/StudyOrth';
 
 export default class Study {
 
@@ -14,17 +14,17 @@ export default class Study {
     private _patientName: String;
     private _instances: Instance[];
 
-    constructor(study: StudyOrth = undefined) {
-        if(study) {
+    constructor(study: StudyOrth) {
+        if (study) {
             this.copyProperties(study);
         }
     }
 
-    private copyProperties(study: StudyOrth){
-        
-        this._id = study.ID; 
+    private copyProperties(study: StudyOrth) {
 
-        if (study.MainDicomTags != undefined) {
+        this._id = study.ID;
+
+        if (study.MainDicomTags !== undefined) {
             this._institutionName = study.MainDicomTags.InstitutionName;
             this._referringPhysicianName = study.MainDicomTags.ReferringPhysicianName;
             this._studyDate = study.MainDicomTags.StudyDate;
@@ -33,7 +33,7 @@ export default class Study {
             this._studyTime = study.MainDicomTags.StudyTime;
         }
 
-        if (study.Series != undefined) {
+        if (study.Series !== undefined) {
             this._numberSeries = study.Series.length;
         }
 

@@ -1,12 +1,12 @@
 export interface TagsOrth {
-    "0028,0010": TagValue;
-    "0028,0011": TagValue;
-    "0028,1050": TagValue; // wc
-    "0028,1051": TagValue; // ww
-    "0028,0103": TagValue; // Pixel Representation
-    "0028,0100": TagValue; // bits alocated
-    "0028,0004": TagValue; // photo inter
-    "5200,9229": SharedFunctionalGroupsSequence
+    '0028,0010': TagValue;
+    '0028,0011': TagValue;
+    '0028,1050': TagValue; // wc
+    '0028,1051': TagValue; // ww
+    '0028,0103': TagValue; // Pixel Representation
+    '0028,0100': TagValue; // bits alocated
+    '0028,0004': TagValue; // photo inter
+    '5200,9229': SharedFunctionalGroupsSequence;
 }
 
 interface TagValue {
@@ -18,12 +18,12 @@ interface TagValue {
 interface SharedFunctionalGroupsSequence {
     Name: String;
     Type: String;
-    Value: TagValueArray[]
+    Value: TagValueArray[];
 }
 
 interface TagValueArray {
-    "0028,9132" : TagValueLut;
-    "0028,9145" : TagRescale
+    '0028,9132': TagValueLut;
+    '0028,9145': TagRescale;
 }
 
 interface TagRescale {
@@ -33,8 +33,8 @@ interface TagRescale {
 }
 
 interface RescaleTags {
-    "0028,1052": TagValue;
-    "0028,1053": TagValue;
+    '0028,1052': TagValue;
+    '0028,1053': TagValue;
 }
 
 interface TagValueLut {
@@ -44,6 +44,6 @@ interface TagValueLut {
 }
 
 interface Lut {
-    "0028,1050": TagValue; // wc
-    "0028,1051": TagValue; // ww
+    '0028,1050': TagValue; // wc
+    '0028,1051': TagValue; // ww
 }

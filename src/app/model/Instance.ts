@@ -1,5 +1,5 @@
-import { InstanceOrth } from "src/app/interface/InstanceOrth";
-import { TagsOrth } from "../interface/TagsOrth";
+import { InstanceOrth } from 'src/app/interface/InstanceOrth';
+import { TagsOrth } from '../interface/TagsOrth';
 
 export default class Instance {
 
@@ -18,7 +18,7 @@ export default class Instance {
 
     private _hasWindow: Boolean;
 
-    constructor(instance: InstanceOrth = undefined) {
+    constructor(instance: InstanceOrth) {
         if (instance) {
             this.copyProperties(instance);
         }
@@ -121,15 +121,15 @@ export default class Instance {
     private initTags() {
 
         try {
-            this.ww = Number(this.tags["0028,1051"].Value);
-            this.wc = Number(this.tags["0028,1050"].Value);
+            this.ww = Number(this.tags['0028,1051'].Value);
+            this.wc = Number(this.tags['0028,1050'].Value);
 
             this.hasWindow = true;
         } catch (err) {
 
             try {
-                this.ww = Number(this.tags["5200,9229"].Value[0]["0028,9132"].Value[0]["0028,1051"].Value);
-                this.wc = Number(this.tags["5200,9229"].Value[0]["0028,9132"].Value[0]["0028,1050"].Value);
+                this.ww = Number(this.tags['5200,9229'].Value[0]['0028,9132'].Value[0]['0028,1051'].Value);
+                this.wc = Number(this.tags['5200,9229'].Value[0]['0028,9132'].Value[0]['0028,1050'].Value);
                 this.hasWindow = true;
             } catch (errr) {
                 this.hasWindow = false;
@@ -137,15 +137,15 @@ export default class Instance {
         }
 
         try {
-            this.rescaleIntercept = Number(this.tags["5200,9229"].Value[0]["0028,9145"].Value[0]["0028,1052"].Value);
-            this.rescaleSlope = Number(this.tags["5200,9229"].Value[0]["0028,9145"].Value[0]["0028,1053"].Value);
+            this.rescaleIntercept = Number(this.tags['5200,9229'].Value[0]['0028,9145'].Value[0]['0028,1052'].Value);
+            this.rescaleSlope = Number(this.tags['5200,9229'].Value[0]['0028,9145'].Value[0]['0028,1053'].Value);
         } catch (err) {
             this.rescaleSlope = 1;
             this.rescaleIntercept = 0;
         }
 
 
-        this.cols = Number(this.tags["0028,0011"].Value);
-        this.rows = Number(this.tags["0028,0010"].Value);
+        this.cols = Number(this.tags['0028,0011'].Value);
+        this.rows = Number(this.tags['0028,0010'].Value);
     }
 }

@@ -4,7 +4,7 @@ import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
 
-import axios from 'axios'
+import axios from 'axios';
 import { StudyService } from './service/study.service';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { ViewportComponent } from './viewer/viewport/viewport.component';
@@ -21,7 +21,7 @@ const instance = axios.create({
   withCredentials: true,
   headers: {
     'Access-Control-Allow-Origin': 'localhost:8042',
-    'Authorization': window.btoa("orthanc:orthanc").toString(),
+    'Authorization': window.btoa('orthanc:orthanc').toString(),
   }
 });
 
@@ -35,7 +35,7 @@ const instance = axios.create({
     BrowserModule,
     NgxSmartModalModule.forRoot()
   ],
-  providers: [ {provide: Http, useValue: instance}, {provide: StudyService, useValue: new StudyService(instance)}, NgxSmartModalService ], 
+  providers: [ {provide: Http, useValue: instance}, {provide: StudyService, useValue: new StudyService(instance)}, NgxSmartModalService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
