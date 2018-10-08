@@ -8,6 +8,7 @@ import axios from 'axios';
 import { StudyService } from './service/study.service';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { ViewportComponent } from './viewer/viewport/viewport.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @Injectable({
@@ -33,7 +34,8 @@ const instance = axios.create({
   ],
   imports: [
     BrowserModule,
-    NgxSmartModalModule.forRoot()
+    NgxSmartModalModule.forRoot(),
+    FontAwesomeModule
   ],
   providers: [ {provide: Http, useValue: instance}, {provide: StudyService, useValue: new StudyService(instance)}, NgxSmartModalService ],
   bootstrap: [ AppComponent ]

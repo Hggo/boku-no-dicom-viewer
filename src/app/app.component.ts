@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
-import { NgxSmartModalService } from 'ngx-smart-modal';
-
 
 @Component({
   selector: 'app-root',

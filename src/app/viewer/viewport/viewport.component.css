@@ -10,16 +10,16 @@
 
 #topToolbox {
     height: 50px !important;
-    width: 100% !important;
-    float: both;
-    background-color: darkslategrey;
+    width: 90%;
+    float: right;
+    background-color: #010c1c;
 }
 
 #leftToolbox {
     height: 100%;
     width: 10%;
     float: left;
-    background-color: darkslategrey;
+    background-color: #010c1c;
 }
 
 #webgl {
@@ -49,4 +49,19 @@
     right: 50px;
     bottom: 30px;
     color: yellow;
+}
+
+.dicom-tool-button {
+    height: 100%;
+    background-color: #010c1c;
+}
+
+.dicom-tool-button:hover {
+    background-color: #073678;
+}
+
+.dicom-tool-button > fa-icon {
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
 }

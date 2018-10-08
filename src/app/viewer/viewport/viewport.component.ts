@@ -7,6 +7,8 @@ import { DrawCanvas } from '../utils/DrawCanvas';
 import { MouseListener } from '../utils/MouseListener';
 import * as THREE from 'three';
 import { DicomViewer } from '../../objects/DicomViewer';
+import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-viewport',
@@ -16,6 +18,14 @@ import { DicomViewer } from '../../objects/DicomViewer';
 export class ViewportComponent implements OnChanges {
 
   constructor(private studyService: StudyService) {}
+
+  public faAdjust = faAdjust;
+  public faArrowsAlt = faArrowsAlt;
+  public faSearchPlus = faSearchPlus;
+  public faArrowsAltH = faArrowsAltH;
+  public faSquare = faSquare;
+  public faCircle = faCircle;
+  public faLayerGroup = faLayerGroup;
 
   private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
