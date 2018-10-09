@@ -1,7 +1,7 @@
 import { DicomToolbarButton } from './DicomToolbarButton';
 import { faAdjust } from '@fortawesome/free-solid-svg-icons';
-import { MouseListener } from '../../../viewer/utils/MouseListener';
 import { DicomViewer } from '../../DicomViewer';
+import { MouseListener } from '../../../utils/MouseListener';
 
 
 export class AdjustWindowButton extends DicomToolbarButton {

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
+import { PesquisaComponent } from './screens/pesquisa/pesquisa.component';
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
-import Instance from '../../model/Instance';
-import { CanvasImageData } from '../../model/CanvasImageData';
+import { DicomViewer } from '../objects/DicomViewer';
+import Instance from '../model/Instance';
+import { CanvasImageData } from './CanvasImageData';
 import * as THREE from 'three';
-import { DicomViewer } from '../../objects/DicomViewer';
 
 export class DrawCanvas {
     public static drawPixelData(dicomViewer: DicomViewer, instance: Instance) {

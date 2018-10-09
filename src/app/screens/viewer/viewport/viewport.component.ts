@@ -1,14 +1,12 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import Study from '../../model/Study';
-import { StudyService } from '../../service/study.service';
-import Instance from '../../model/Instance';
-import { CanvasImageData } from '../../model/CanvasImageData';
-import { DrawCanvas } from '../utils/DrawCanvas';
-import { MouseListener } from '../utils/MouseListener';
 import * as THREE from 'three';
-import { DicomViewer } from '../../objects/DicomViewer';
 import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
-import { MouseWheelListener } from '../utils/MouseWheelListener';
+import { StudyService } from '../../../service/study.service';
+import { MouseWheelListener } from '../../../utils/MouseWheelListener';
+import { DicomViewer } from '../../../objects/DicomViewer';
+import Study from '../../../model/Study';
+import Instance from '../../../model/Instance';
+import { DrawCanvas } from '../../../utils/DrawCanvas';
 
 
 @Component({

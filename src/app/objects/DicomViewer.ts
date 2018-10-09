@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import Instance from '../model/Instance';
-import { DrawCanvas } from '../viewer/utils/DrawCanvas';
+import { DrawCanvas } from '../utils/DrawCanvas';
 
 export class DicomViewer {
 

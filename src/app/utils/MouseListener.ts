@@ -1,4 +1,4 @@
-import { DicomViewer } from '../../objects/DicomViewer';
+import { DicomViewer } from '../objects/DicomViewer';
 
 export class MouseListener {
 

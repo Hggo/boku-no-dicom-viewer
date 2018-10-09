@@ -1,4 +1,4 @@
-import Instance from './Instance';
+import Instance from '../model/Instance';
 
 export class CanvasImageData {
 

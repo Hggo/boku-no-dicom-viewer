@@ -2,14 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { PesquisaComponent } from './tela/pesquisa/pesquisa.component';
 
 import axios from 'axios';
 import { StudyService } from './service/study.service';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
-import { ViewportComponent } from './viewer/viewport/viewport.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DicomToolbarComponent } from './objects/dicom-toolbar/dicom-toolbar.component';
+import { PesquisaComponent } from './screens/pesquisa/pesquisa.component';
+import { ViewportComponent } from './screens/viewer/viewport/viewport.component';
 
 
 @Injectable({

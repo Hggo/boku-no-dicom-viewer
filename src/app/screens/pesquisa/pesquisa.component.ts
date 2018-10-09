@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { StudyService } from '../../service/study.service';
 import Study from '../../model/Study';
 import { NgxSmartModalService } from 'ngx-smart-modal';
-import { ViewportComponent } from '../../viewer/viewport/viewport.component';
-
 
 @Component({
   selector: 'app-pesquisa',
