@@ -9,7 +9,7 @@
 }
 
 #topToolbox {
-    height: 50px !important;
+    height: 10% !important;
     width: 90%;
     float: right;
     background-color: #010c1c;
@@ -52,8 +52,8 @@
 }
 
 .dicom-tool-button {
-    height: 100%;
     background-color: #010c1c;
+    padding: 18px;
 }
 
 .dicom-tool-button:hover {
