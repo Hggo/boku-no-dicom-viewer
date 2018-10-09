@@ -8,6 +8,7 @@ import { MouseListener } from '../utils/MouseListener';
 import * as THREE from 'three';
 import { DicomViewer } from '../../objects/DicomViewer';
 import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { MouseWheelListener } from '../utils/MouseWheelListener';
 
 
 @Component({
@@ -15,9 +16,10 @@ import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, 
   templateUrl: './viewport.component.html',
   styleUrls: ['./viewport.component.css']
 })
-export class ViewportComponent implements OnChanges {
+export class ViewportComponent implements OnInit {
 
   constructor(private studyService: StudyService) {}
+  wheelListener: MouseWheelListener;
 
   public faAdjust = faAdjust;
   public faArrowsAlt = faArrowsAlt;
@@ -39,10 +41,19 @@ export class ViewportComponent implements OnChanges {
   private treatWindow = function(deltaX: number, deltaY: number) {
     this.instance.ww += (deltaX / 1);
     this.instance.wc += (deltaY / 1);
-    this.draw();
+    requestAnimationFrame(this.render);
   }.bind(this);
 
-  ngOnChanges() {
+  private treatZoom = function(direction: number) {
+    this.dicomViewer.zoom = direction > 0 ? this.dicomViewer.zoom * 1.1 : this.dicomViewer.zoom / 1.1;
+    this.dicomViewer.applyDistance();
+  }.bind(this);
+
+  private render = function() {
+    DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
+  }.bind(this);
+
+  ngOnInit() {
     this.studyService.getInstancesFromStudy(this.study)
                      .then(instances => this.resolveInstances(instances));
   }
@@ -74,15 +85,11 @@ export class ViewportComponent implements OnChanges {
 
     this.dicomViewer = new DicomViewer(this.webglDiv);
     this.mouseListener = new MouseListener(this.webglDiv, this.treatWindow);
-
-    this.draw();
-    this.mouseListener.listen();
-  }
-
-  private draw() {
-
+    this.wheelListener = new MouseWheelListener(this.webglDiv, this.treatZoom);
     this.instance = this.study.instances[0];
 
-    DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
+    this.mouseListener.listen();
+    this.wheelListener.listen();
+    requestAnimationFrame(this.render);
   }
 }
