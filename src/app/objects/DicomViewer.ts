@@ -34,13 +34,14 @@ export class DicomViewer {
         this.scene = new THREE.Scene();
     }
 
-    private initCamera(instance: Instance) {
+    private initCamera(instance: Instance, mesh: THREE.MeshBasicMaterial) {
 
         this.instance = instance;
 
         if (!this.camera) {
             this.fov = 75;
             this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, 0.1, 1000);
+            this.camera.lookAt(mesh.position);
         }
 
         this.camera.position.x = 0;
@@ -65,8 +66,9 @@ export class DicomViewer {
         mesh.scale.y = -1;
 
         this.scene.add(mesh);
-        this.initCamera(instance);
-        this.camera.lookAt(mesh.position);
-        this.renderer.render(this.scene, this.camera);
+        if (!this.camera) {
+            this.initCamera(instance, mesh);
+        }
+        this.applyDistance();
     }
 }
