@@ -50,18 +50,3 @@
     bottom: 30px;
     color: yellow;
 }
-
-.dicom-tool-button {
-    background-color: #010c1c;
-    padding: 18px;
-}
-
-.dicom-tool-button:hover {
-    background-color: #073678;
-}
-
-.dicom-tool-button > fa-icon {
-    margin-left: auto;
-    margin-right: auto;
-    color: white;
-}

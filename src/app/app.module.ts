@@ -9,6 +9,7 @@ import { StudyService } from './service/study.service';
 import { NgxSmartModalModule, NgxSmartModalService } from 'ngx-smart-modal';
 import { ViewportComponent } from './viewer/viewport/viewport.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DicomToolbarComponent } from './objects/dicom-toolbar/dicom-toolbar.component';
 
 
 @Injectable({
@@ -30,7 +31,8 @@ const instance = axios.create({
   declarations: [
     AppComponent,
     PesquisaComponent,
-    ViewportComponent
+    ViewportComponent,
+    DicomToolbarComponent
   ],
   imports: [
     BrowserModule,
