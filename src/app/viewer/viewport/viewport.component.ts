@@ -36,13 +36,6 @@ export class ViewportComponent implements OnInit {
   private renderer: THREE.WebGLRenderer;
   public instance: Instance;
   private ctx: CanvasRenderingContext2D;
-  private mouseListener: MouseListener;
-
-  private treatWindow = function(deltaX: number, deltaY: number) {
-    this.instance.ww += (deltaX / 1);
-    this.instance.wc += (deltaY / 1);
-    requestAnimationFrame(this.render);
-  }.bind(this);
 
   private treatZoom = function(direction: number) {
     this.dicomViewer.zoom = direction > 0 ? this.dicomViewer.zoom * 1.1 : this.dicomViewer.zoom / 1.1;
@@ -83,12 +76,10 @@ export class ViewportComponent implements OnInit {
   private initCanvas() {
     this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
 
-    this.dicomViewer = new DicomViewer(this.webglDiv);
-    this.mouseListener = new MouseListener(this.webglDiv, this.treatWindow);
+    this.dicomViewer = new DicomViewer(this.webglDiv, this.study.instances[0]);
     this.wheelListener = new MouseWheelListener(this.webglDiv, this.treatZoom);
     this.instance = this.study.instances[0];
 
-    this.mouseListener.listen();
     this.wheelListener.listen();
     requestAnimationFrame(this.render);
   }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DicomToolbarButton } from './DicomToolbarButton';
+import { Component, OnInit, Input } from '@angular/core';
+import { DicomToolbarButton } from './button/DicomToolbarButton';
 import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { DicomViewer } from '../DicomViewer';
+import { AdjustWindowButton } from './button/AdjustWindowButton';
 
 
 @Component({
@@ -10,6 +12,7 @@ import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, 
 })
 export class DicomToolbarComponent implements OnInit {
 
+  @Input() dicomViewer: DicomViewer;
   dicomButtons: DicomToolbarButton[];
   constructor() { }
 
@@ -19,12 +22,12 @@ export class DicomToolbarComponent implements OnInit {
 
   initDicomButtons() {
     this.dicomButtons = [];
-    this.dicomButtons.push(new DicomToolbarButton(faAdjust));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt));
-    this.dicomButtons.push(new DicomToolbarButton(faSearchPlus));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH));
-    this.dicomButtons.push(new DicomToolbarButton(faSquare));
-    this.dicomButtons.push(new DicomToolbarButton(faCircle));
-    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup));
+    this.dicomButtons.push(new AdjustWindowButton(this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faSearchPlus, this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer));
+    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer));
   }
 }

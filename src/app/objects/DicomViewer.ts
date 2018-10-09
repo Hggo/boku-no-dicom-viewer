@@ -1,25 +1,29 @@
 import * as THREE from 'three';
 import Instance from '../model/Instance';
+import { DrawCanvas } from '../viewer/utils/DrawCanvas';
 
 export class DicomViewer {
 
-    private width: number;
-    private height: number;
-    private plane: any;
-    private camera: THREE.PerspectiveCamera;
-    private renderer: THREE.WebGLRenderer;
-    private scene: THREE.Scene;
-    private fov: number;
-    public zoom: number;
-    private instance: Instance;
-
-    constructor(private webglDiv: HTMLDivElement) {
+    constructor(public webglDiv: HTMLDivElement, private instance: Instance) {
 
         this.zoom = 1;
 
         this.initRenderer();
         this.createScene();
     }
+
+    private width: number;
+    private height: number;
+    private plane: any;
+    private camera: THREE.PerspectiveCamera;
+    public renderer: THREE.WebGLRenderer;
+    private scene: THREE.Scene;
+    private fov: number;
+    public zoom: number;
+
+    public render = function () {
+        DrawCanvas.drawPixelData(this, this.instance);
+    }.bind(this);
 
     private initRenderer() {
         this.height = window.innerHeight * 0.9;

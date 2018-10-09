@@ -1,6 +1,8 @@
+import { DicomViewer } from '../../objects/DicomViewer';
+
 export class MouseListener {
 
-    constructor(private renderer: HTMLDivElement, private tratar: Function) {
+    constructor(private dicomViewer: DicomViewer, private tratar: Function) {
 
     }
 
@@ -8,13 +10,13 @@ export class MouseListener {
     private lastY: number;
 
     handle_keydown = function (e) {
-        this.renderer.addEventListener('mousemove', this.mouseMoveHandler);
-        this.renderer.addEventListener('mouseup', this.mouseUpHandler);
+        this.dicomViewer.webglDiv.addEventListener('mousemove', this.mouseMoveHandler);
+        this.dicomViewer.webglDiv.addEventListener('mouseup', this.mouseUpHandler);
     }.bind(this);
 
     mouseUpHandler = function (e) {
-        this.renderer.removeEventListener('mousemove', this.mouseMoveHandler);
-        this.renderer.removeEventListener('mouseup', this.mouseUpHandler);
+        this.dicomViewer.webglDiv.removeEventListener('mousemove', this.mouseMoveHandler);
+        this.dicomViewer.webglDiv.removeEventListener('mouseup', this.mouseUpHandler);
     }.bind(this);
 
     mouseMoveHandler = function (e) {
@@ -27,7 +29,7 @@ export class MouseListener {
     }.bind(this);
 
     public listen() {
-        this.renderer.addEventListener('mousedown', function (e) {
+        this.dicomViewer.webglDiv.addEventListener('mousedown', function (e) {
             this.lastX = e.pageX;
             this.lastY = e.pageY;
 

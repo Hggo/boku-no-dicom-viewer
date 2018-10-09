@@ -12,3 +12,7 @@
     margin-right: auto;
     color: white;
 }
+
+.active {
+    background-color: #073678;
+}
