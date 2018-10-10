@@ -1,11 +1,10 @@
-import { DicomToolbarButton } from './DicomToolbarButton';
+import { DicomToolbarButton } from './generic/DicomToolbarButton';
 import { DicomViewer } from '../../DicomViewer';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
 import { MouseWheelListener } from '../../../utils/MouseWheelListener';
 
 export class ZoomButton extends DicomToolbarButton {
 
-    public active: boolean;
     public wheelListener: MouseWheelListener;
 
     constructor(dicomViewer: DicomViewer, selecionar: Function) {

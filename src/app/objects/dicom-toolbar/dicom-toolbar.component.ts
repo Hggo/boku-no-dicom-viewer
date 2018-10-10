@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DicomToolbarButton } from './button/DicomToolbarButton';
+import { DicomToolbarButton } from './button/generic/DicomToolbarButton';
 import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { DicomViewer } from '../DicomViewer';
 import { AdjustWindowButton } from './button/AdjustWindowButton';

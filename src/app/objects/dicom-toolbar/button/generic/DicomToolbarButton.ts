@@ -1,5 +1,5 @@
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { DicomViewer } from '../../DicomViewer';
+import { DicomViewer } from '../../../DicomViewer';
 
 export class DicomToolbarButton {
 
@@ -26,6 +26,6 @@ export class DicomToolbarButton {
     }
 
     public removeListeners() {
-        //throw new Error('Not implemented');
+        throw new Error('Not implemented');
     }
 }
