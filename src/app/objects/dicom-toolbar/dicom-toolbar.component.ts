@@ -3,6 +3,7 @@ import { DicomToolbarButton } from './button/DicomToolbarButton';
 import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { DicomViewer } from '../DicomViewer';
 import { AdjustWindowButton } from './button/AdjustWindowButton';
+import { ZoomButton } from './button/ZoomButton';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class DicomToolbarComponent implements OnInit {
     this.dicomButtons = [];
     this.dicomButtons.push(new AdjustWindowButton(this.dicomViewer));
     this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faSearchPlus, this.dicomViewer));
+    this.dicomButtons.push(new ZoomButton(this.dicomViewer));
     this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer));
     this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer));
     this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer));

@@ -1,6 +1,8 @@
+import { DicomViewer } from '../objects/DicomViewer';
+
 export class MouseWheelListener {
 
-    constructor(private renderer: HTMLDivElement, private tratar: Function) {
+    constructor(private dicomViewer: DicomViewer, private tratar: Function) {
 
     }
 
@@ -13,6 +15,6 @@ export class MouseWheelListener {
     }.bind(this);
 
     public listen() {
-        this.renderer.addEventListener('wheel', this.mouseWheelHandler);
+        this.dicomViewer.webglDiv.addEventListener('wheel', this.mouseWheelHandler);
     }
 }

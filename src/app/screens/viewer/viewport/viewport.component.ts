@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import * as THREE from 'three';
-import { faAdjust, faArrowsAlt, faSearchPlus, faArrowsAltH, faSquare, faCircle, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { StudyService } from '../../../service/study.service';
 import { MouseWheelListener } from '../../../utils/MouseWheelListener';
 import { DicomViewer } from '../../../objects/DicomViewer';
@@ -17,15 +16,6 @@ import { DrawCanvas } from '../../../utils/DrawCanvas';
 export class ViewportComponent implements OnInit {
 
   constructor(private studyService: StudyService) {}
-  wheelListener: MouseWheelListener;
-
-  public faAdjust = faAdjust;
-  public faArrowsAlt = faArrowsAlt;
-  public faSearchPlus = faSearchPlus;
-  public faArrowsAltH = faArrowsAltH;
-  public faSquare = faSquare;
-  public faCircle = faCircle;
-  public faLayerGroup = faLayerGroup;
 
   private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
@@ -34,11 +24,6 @@ export class ViewportComponent implements OnInit {
   private renderer: THREE.WebGLRenderer;
   public instance: Instance;
   private ctx: CanvasRenderingContext2D;
-
-  private treatZoom = function(direction: number) {
-    this.dicomViewer.zoom = direction > 0 ? this.dicomViewer.zoom * 1.1 : this.dicomViewer.zoom / 1.1;
-    this.dicomViewer.applyDistance();
-  }.bind(this);
 
   private render = function() {
     DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
@@ -75,10 +60,7 @@ export class ViewportComponent implements OnInit {
     this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
 
     this.dicomViewer = new DicomViewer(this.webglDiv, this.study.instances[0]);
-    this.wheelListener = new MouseWheelListener(this.webglDiv, this.treatZoom);
     this.instance = this.study.instances[0];
-
-    this.wheelListener.listen();
     requestAnimationFrame(this.render);
   }
 }
