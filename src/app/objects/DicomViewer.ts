@@ -20,6 +20,8 @@ export class DicomViewer {
     private scene: THREE.Scene;
     private fov: number;
     public zoom: number;
+    public panx: number;
+    public pany: number;
 
     public render = function () {
         DrawCanvas.drawPixelData(this, this.instance);
@@ -28,6 +30,9 @@ export class DicomViewer {
     private initRenderer() {
         this.height = window.innerHeight * 0.9;
         this.width = window.innerWidth * 0.9;
+
+        this.panx = 0;
+        this.pany = 0;
 
         this.renderer = new THREE.WebGLRenderer();
         this.renderer.setSize(this.width, this.height);
@@ -48,12 +53,16 @@ export class DicomViewer {
             this.camera.lookAt(mesh.position);
         }
 
-        this.camera.position.x = 0;
-        this.camera.position.y = 0;
+        this.camera.position.x = this.panx;
+        this.camera.position.y = this.pany;
         this.camera.position.z = this.instance.rows / (2 * Math.tan(this.camera.fov * Math.PI / 360));
     }
 
     public applyDistance() {
+
+        this.camera.position.x = this.panx;
+        this.camera.position.y = this.pany;
+
         this.camera.fov = this.fov * this.zoom;
         this.camera.updateProjectionMatrix();
         this.renderer.render(this.scene, this.camera);
