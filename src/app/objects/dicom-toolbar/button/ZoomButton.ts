@@ -9,7 +9,7 @@ export class ZoomButton extends DicomToolbarButton {
     public wheelListener: MouseWheelListener;
 
     constructor(dicomViewer: DicomViewer, selecionar: Function) {
-        super(faSearchPlus, dicomViewer, selecionar);
+        super(faSearchPlus, dicomViewer, selecionar, DicomToolbarButton.WHEELTYPE);
     }
 
     private treatZoom = function (direction: number) {

@@ -18,7 +18,7 @@ export class DicomToolbarComponent implements OnInit {
   dicomButtons: DicomToolbarButton[];
 
   unselectOthers = function(buttonToSelect: DicomToolbarButton) {
-    this.dicomButtons.forEach(btn => btn.active = false);
+    this.dicomButtons.forEach(btn => btn.active = btn.type === buttonToSelect.type ? false : btn.active);
     buttonToSelect.active = true;
   }.bind(this);
 
@@ -29,11 +29,11 @@ export class DicomToolbarComponent implements OnInit {
   initDicomButtons() {
     this.dicomButtons = [];
     this.dicomButtons.push(new AdjustWindowButton(this.dicomViewer, this.unselectOthers));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
     this.dicomButtons.push(new ZoomButton(this.dicomViewer, this.unselectOthers));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer, this.unselectOthers));
-    this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer, this.unselectOthers));
-    this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer, this.unselectOthers));
-    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
+    this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
+    this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
+    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
   }
 }
