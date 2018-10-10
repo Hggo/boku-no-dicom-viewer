@@ -25,4 +25,10 @@ export class ZoomButton extends DicomToolbarButton {
             this.wheelListener.listen();
         }
     }
+
+    public removeListeners() {
+        if (this.wheelListener) {
+            this.wheelListener.removeListeners();
+        }
+    }
 }

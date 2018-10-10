@@ -18,8 +18,13 @@ export class DicomToolbarComponent implements OnInit {
   @Input() dicomViewer: DicomViewer;
   dicomButtons: DicomToolbarButton[];
 
-  unselectOthers = function(buttonToSelect: DicomToolbarButton) {
-    this.dicomButtons.forEach(btn => btn.active = btn.type === buttonToSelect.type ? false : btn.active);
+  unselectOthers = function (buttonToSelect: DicomToolbarButton) {
+    this.dicomButtons.forEach(btn => {
+      if (btn.type === buttonToSelect.type) {
+        btn.active = false;
+        btn.removeListeners();
+      }
+    });
     buttonToSelect.active = true;
   }.bind(this);
 

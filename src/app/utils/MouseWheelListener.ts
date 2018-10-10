@@ -17,4 +17,8 @@ export class MouseWheelListener {
     public listen() {
         this.dicomViewer.webglDiv.addEventListener('wheel', this.mouseWheelHandler);
     }
+
+    public removeListeners() {
+        this.dicomViewer.webglDiv.removeEventListener('wheel', this.mouseWheelHandler());
+    }
 }

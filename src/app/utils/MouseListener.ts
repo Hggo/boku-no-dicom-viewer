@@ -28,12 +28,18 @@ export class MouseListener {
         this.tratar(deltaX, deltaY);
     }.bind(this);
 
-    public listen() {
-        this.dicomViewer.webglDiv.addEventListener('mousedown', function (e) {
-            this.lastX = e.pageX;
-            this.lastY = e.pageY;
+    applyListen =  function (e) {
+        this.lastX = e.pageX;
+        this.lastY = e.pageY;
 
-            this.handle_keydown(e);
-        }.bind(this));
+        this.handle_keydown(e);
+    }.bind(this);
+
+    public listen() {
+        this.dicomViewer.webglDiv.addEventListener('mousedown', this.applyListen);
+    }
+
+    public removeListeners() {
+        this.dicomViewer.webglDiv.removeEventListener('mousedown', this.applyListen);
     }
 }

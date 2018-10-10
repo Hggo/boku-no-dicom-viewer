@@ -26,4 +26,10 @@ export class PanButton extends DicomToolbarButton {
             this.mouseListener.listen();
         }
     }
+
+    public removeListeners() {
+        if (this.mouseListener) {
+            this.mouseListener.removeListeners();
+        }
+    }
 }
