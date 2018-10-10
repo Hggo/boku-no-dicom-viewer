@@ -25,7 +25,7 @@ export class MouseListener {
         this.lastX = e.pageX;
         this.lastY = e.pageY;
 
-        this.tratar(deltaX, deltaX);
+        this.tratar(deltaX, deltaY);
     }.bind(this);
 
     public listen() {
