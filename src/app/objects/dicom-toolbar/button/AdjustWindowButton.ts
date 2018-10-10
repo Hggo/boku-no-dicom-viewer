@@ -8,8 +8,8 @@ export class AdjustWindowButton extends DicomToolbarButton {
 
     public active: boolean;
 
-    constructor(dicomViewer: DicomViewer) {
-        super(faAdjust, dicomViewer);
+    constructor(dicomViewer: DicomViewer, selecionar: Function) {
+        super(faAdjust, dicomViewer, selecionar);
     }
     mouseListener: MouseListener;
 
@@ -19,8 +19,7 @@ export class AdjustWindowButton extends DicomToolbarButton {
         requestAnimationFrame(this.dicomViewer.render);
     }.bind(this);
 
-    public click() {
-        this.active = true;
+    public treatClick() {
         if (!this.mouseListener) {
             this.mouseListener = new MouseListener(this.dicomViewer, this.treatWindow);
             this.mouseListener.listen();

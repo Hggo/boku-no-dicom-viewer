@@ -8,8 +8,8 @@ export class ZoomButton extends DicomToolbarButton {
     public active: boolean;
     public wheelListener: MouseWheelListener;
 
-    constructor(dicomViewer: DicomViewer) {
-        super(faSearchPlus, dicomViewer);
+    constructor(dicomViewer: DicomViewer, selecionar: Function) {
+        super(faSearchPlus, dicomViewer, selecionar);
     }
 
     private treatZoom = function (direction: number) {
@@ -18,7 +18,7 @@ export class ZoomButton extends DicomToolbarButton {
         requestAnimationFrame(this.dicomViewer.render);
     }.bind(this);
 
-    public click() {
+    public treatClick() {
         this.active = true;
         if (!this.wheelListener) {
             this.wheelListener = new MouseWheelListener(this.dicomViewer, this.treatZoom);

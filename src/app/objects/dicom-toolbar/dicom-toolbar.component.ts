@@ -12,10 +12,15 @@ import { ZoomButton } from './button/ZoomButton';
   styleUrls: ['./dicom-toolbar.component.css']
 })
 export class DicomToolbarComponent implements OnInit {
+  constructor() { }
 
   @Input() dicomViewer: DicomViewer;
   dicomButtons: DicomToolbarButton[];
-  constructor() { }
+
+  unselectOthers = function(buttonToSelect: DicomToolbarButton) {
+    this.dicomButtons.forEach(btn => btn.active = false);
+    buttonToSelect.active = true;
+  }.bind(this);
 
   ngOnInit() {
     this.initDicomButtons();
@@ -23,12 +28,12 @@ export class DicomToolbarComponent implements OnInit {
 
   initDicomButtons() {
     this.dicomButtons = [];
-    this.dicomButtons.push(new AdjustWindowButton(this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer));
-    this.dicomButtons.push(new ZoomButton(this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer));
-    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer));
+    this.dicomButtons.push(new AdjustWindowButton(this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAlt, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new ZoomButton(this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer, this.unselectOthers));
+    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer, this.unselectOthers));
   }
 }

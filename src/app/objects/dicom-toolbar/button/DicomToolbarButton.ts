@@ -5,14 +5,20 @@ export class DicomToolbarButton {
 
     size: string;
     fixedWidth: string;
+    active: boolean;
 
-    constructor(public icon: IconDefinition, protected dicomViewer: DicomViewer) {
+    constructor(public icon: IconDefinition, protected dicomViewer: DicomViewer, private selecionar: Function) {
         this.icon = icon;
         this.size = '1x';
         this.fixedWidth = 'true';
     }
 
     public click() {
-        throw new Error('Not implemented');
+        this.selecionar(this);
+        this.treatClick();
+    }
+
+    public treatClick() {
+        throw new Error('Nor implemented');
     }
 }
