@@ -1,12 +1,8 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import * as THREE from 'three';
 import { StudyService } from '../../../service/study.service';
-import { MouseWheelListener } from '../../../utils/MouseWheelListener';
 import { DicomViewer } from '../../../objects/DicomViewer';
 import Study from '../../../model/Study';
 import Instance from '../../../model/Instance';
-import { DrawCanvas } from '../../../utils/DrawCanvas';
-
 
 @Component({
   selector: 'app-viewport',
@@ -20,14 +16,7 @@ export class ViewportComponent implements OnInit {
   private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
   @Input() study: Study;
-
-  private renderer: THREE.WebGLRenderer;
   public instance: Instance;
-  private ctx: CanvasRenderingContext2D;
-
-  private render = function() {
-    DrawCanvas.drawPixelData(this.dicomViewer, this.instance);
-  }.bind(this);
 
   ngOnInit() {
     this.studyService.getInstancesFromStudy(this.study)
@@ -35,7 +24,6 @@ export class ViewportComponent implements OnInit {
   }
 
   private resolveInstances(instances: Instance[]) {
-
     if (instances && instances.length > 0) {
       this.study.instances = instances;
       this.resolvePixelData(this.study.instances[0]);
@@ -60,7 +48,6 @@ export class ViewportComponent implements OnInit {
     this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
 
     this.dicomViewer = new DicomViewer(this.webglDiv, this.study.instances[0]);
-    this.instance = this.study.instances[0];
-    requestAnimationFrame(this.render);
+    requestAnimationFrame(this.dicomViewer.render);
   }
 }
