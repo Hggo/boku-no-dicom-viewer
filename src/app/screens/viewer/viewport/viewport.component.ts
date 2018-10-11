@@ -3,6 +3,7 @@ import { StudyService } from '../../../service/study.service';
 import { DicomViewer } from '../../../objects/DicomViewer';
 import Study from '../../../model/Study';
 import Instance from '../../../model/Instance';
+import { CanvasImageData } from '../../../utils/CanvasImageData';
 
 @Component({
   selector: 'app-viewport',
@@ -11,7 +12,7 @@ import Instance from '../../../model/Instance';
 })
 export class ViewportComponent implements OnInit {
 
-  constructor(private studyService: StudyService) {}
+  constructor(private studyService: StudyService) { }
 
   private dicomViewer: DicomViewer;
   private webglDiv: HTMLDivElement;
@@ -20,7 +21,7 @@ export class ViewportComponent implements OnInit {
 
   ngOnInit() {
     this.studyService.getInstancesFromStudy(this.study)
-                     .then(instances => this.resolveInstances(instances));
+      .then(instances => this.resolveInstances(instances));
   }
 
   private resolveInstances(instances: Instance[]) {
@@ -28,6 +29,11 @@ export class ViewportComponent implements OnInit {
       this.study.instances = instances;
       this.resolvePixelData(this.study.instances[0]);
     }
+  }
+
+  private resolveThumbnail(instance: Instance) {
+    const img = <HTMLImageElement> document.getElementById('img');
+    img.src = new CanvasImageData(this.study.instances[0]).canvas.toDataURL('image/png');
   }
 
   private resolvePixelData(instance: Instance) {
@@ -49,5 +55,7 @@ export class ViewportComponent implements OnInit {
 
     this.dicomViewer = new DicomViewer(this.webglDiv, this.study.instances[0]);
     requestAnimationFrame(this.dicomViewer.render);
+
+    this.resolveThumbnail(this.study.instances[0]);
   }
 }

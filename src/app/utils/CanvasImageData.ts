@@ -4,8 +4,17 @@ export class CanvasImageData {
 
     private _pixelDataUInt;
     private _pixelData;
+    public preview: ImageData;
+    public canvas: HTMLCanvasElement;
 
     constructor(private instance: Instance) {
+
+        this.canvas = document.createElement('canvas');
+        this.canvas.width = instance.cols;
+        this.canvas.height = instance.rows;
+
+        const ctx = this.canvas.getContext('2d');
+        this.preview = ctx.createImageData(instance.cols, instance.rows);
 
         let counter = 0;
         const pixelRepresentation = instance.tags['0028,0103'].Value;
@@ -34,6 +43,12 @@ export class CanvasImageData {
             this._pixelData[counter++] = lum;
             this._pixelData[counter++] = 255;
         }
+
+        for (let index = 0; index < this._pixelData.length; index++) {
+            this.preview.data[index] = this._pixelData[index];
+        }
+
+        ctx.putImageData(this.preview, 0, 0);
     }
 
     private applyPhotometricInterpretation(pixel: number): number {
