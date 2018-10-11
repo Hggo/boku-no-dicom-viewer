@@ -5,6 +5,8 @@ import Study from '../../../model/Study';
 import Instance from '../../../model/Instance';
 import { CanvasImageData } from '../../../utils/CanvasImageData';
 import Serie from '../../../model/Serie';
+import StudyHelper from '../../../utils/StudyHelper';
+import Thumbnail from '../../../objects/Thumbnail';
 
 @Component({
   selector: 'app-viewport',
@@ -16,57 +18,35 @@ export class ViewportComponent implements OnInit {
   constructor(private studyService: StudyService) { }
 
   private dicomViewer: DicomViewer;
-  private webglDiv: HTMLDivElement;
   @Input() study: Study;
   public instance: Instance;
+  private leftToolBox: HTMLDivElement;
+  public thumbnails: Thumbnail[];
 
-  ngOnInit() {
-    this.studyService.getSeriesFromStudy(this.study).then(series => this.resolveSeries(series));
-  }
+  private initCanvas = function(study: Study) {
+    this.study = study;
+    this.leftToolBox = <HTMLDivElement> document.getElementById('leftToolbox');
+    const webglDiv = <HTMLDivElement> document.getElementById('webgl');
 
-  private resolveSeries(series: Serie[]) {
-    this.study.series = series;
-    this.studyService.getInstancesFromSerie(this.study.series[0])
-                     .then(instances => this.resolveInstancesSeries(instances));
-  }
-
-  private resolveInstancesSeries(instances: Instance[]) {
-    this.study.series[0].Instances = instances;
-    this.resolveInstances(instances);
-  }
-
-  private resolveInstances(instances: Instance[]) {
-    if (instances && instances.length > 0) {
-      this.study.series[0].Instances = instances;
-      this.resolvePixelData(this.study.series[0].Instances[0]);
-    }
-  }
-
-  private resolveThumbnail(instance: Instance) {
-    const img = <HTMLImageElement>document.getElementById('img');
-    img.src = new CanvasImageData(instance).canvas.toDataURL('image/png');
-  }
-
-  private resolvePixelData(instance: Instance) {
-    this.studyService.getPixelData(instance).then(instpd => {
-      instance = instpd;
-      this.resolveTags(instance);
-    });
-  }
-
-  private resolveTags(instance: Instance) {
-    this.studyService.getTags(instance).then(insttags => {
-      instance = insttags;
-      this.initCanvas();
-    });
-  }
-
-  private initCanvas() {
-    this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
-
-    this.dicomViewer = new DicomViewer(this.webglDiv, this.study.series[0].Instances[0]);
+    this.dicomViewer = new DicomViewer(webglDiv, this.study.series[0].Instances[0]);
     requestAnimationFrame(this.dicomViewer.render);
 
-    this.resolveThumbnail(this.study.series[0].Instances[0]);
+     this.resolveThumbnail(this.study.series[0].Instances[0]);
+  }.bind(this);
+
+  private updateInstances = function(instance: Instance, serieN: number, instN: number) {
+    this.study.series[serieN].Instances[instN] = instance;
+    this.resolveThumbnail(instance);
+  }.bind(this);
+
+  ngOnInit() {
+    this.thumbnails = [];
+    const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas, this.updateInstances);
+    studyHelper.prepareStudy();
+  }
+
+  public resolveThumbnail(instance: Instance) {
+    const src = new CanvasImageData(instance).canvas.toDataURL('image/png');
+    this.thumbnails.push(new Thumbnail(src, 'Description'));
   }
 }
