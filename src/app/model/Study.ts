@@ -1,5 +1,6 @@
 import Instance from './Instance';
 import { StudyOrth } from 'src/app/interface/StudyOrth';
+import Serie from './Serie';
 
 export default class Study {
 
@@ -12,7 +13,7 @@ export default class Study {
     private _studyTime: String;
     private _numberSeries: Number;
     private _patientName: String;
-    private _instances: Instance[];
+    private _series: Serie[];
 
     constructor(study: StudyOrth) {
         if (study) {
@@ -110,11 +111,11 @@ export default class Study {
         this._patientName = patientName;
     }
 
-    get instances(): Instance[] {
-        return this._instances;
+    get series(): Serie[] {
+        return this._series;
     }
 
-    set instances(instances: Instance[]) {
-        this._instances = instances;
+    set series(series: Serie[]) {
+        this._series = series;
     }
 }

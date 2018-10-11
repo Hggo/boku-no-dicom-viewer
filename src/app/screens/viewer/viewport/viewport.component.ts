@@ -4,6 +4,7 @@ import { DicomViewer } from '../../../objects/DicomViewer';
 import Study from '../../../model/Study';
 import Instance from '../../../model/Instance';
 import { CanvasImageData } from '../../../utils/CanvasImageData';
+import Serie from '../../../model/Serie';
 
 @Component({
   selector: 'app-viewport',
@@ -20,20 +21,30 @@ export class ViewportComponent implements OnInit {
   public instance: Instance;
 
   ngOnInit() {
-    this.studyService.getInstancesFromStudy(this.study)
-      .then(instances => this.resolveInstances(instances));
+    this.studyService.getSeriesFromStudy(this.study).then(series => this.resolveSeries(series));
+  }
+
+  private resolveSeries(series: Serie[]) {
+    this.study.series = series;
+    this.studyService.getInstancesFromSerie(this.study.series[0])
+                     .then(instances => this.resolveInstancesSeries(instances));
+  }
+
+  private resolveInstancesSeries(instances: Instance[]) {
+    this.study.series[0].Instances = instances;
+    this.resolveInstances(instances);
   }
 
   private resolveInstances(instances: Instance[]) {
     if (instances && instances.length > 0) {
-      this.study.instances = instances;
-      this.resolvePixelData(this.study.instances[0]);
+      this.study.series[0].Instances = instances;
+      this.resolvePixelData(this.study.series[0].Instances[0]);
     }
   }
 
   private resolveThumbnail(instance: Instance) {
-    const img = <HTMLImageElement> document.getElementById('img');
-    img.src = new CanvasImageData(this.study.instances[0]).canvas.toDataURL('image/png');
+    const img = <HTMLImageElement>document.getElementById('img');
+    img.src = new CanvasImageData(instance).canvas.toDataURL('image/png');
   }
 
   private resolvePixelData(instance: Instance) {
@@ -53,9 +64,9 @@ export class ViewportComponent implements OnInit {
   private initCanvas() {
     this.webglDiv = <HTMLDivElement>document.getElementById('webgl');
 
-    this.dicomViewer = new DicomViewer(this.webglDiv, this.study.instances[0]);
+    this.dicomViewer = new DicomViewer(this.webglDiv, this.study.series[0].Instances[0]);
     requestAnimationFrame(this.dicomViewer.render);
 
-    this.resolveThumbnail(this.study.instances[0]);
+    this.resolveThumbnail(this.study.series[0].Instances[0]);
   }
 }
