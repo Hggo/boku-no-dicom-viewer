@@ -31,13 +31,13 @@ export class ViewportComponent implements OnInit {
     this.dicomViewer = new DicomViewer(webglDiv, this.study.series[0].Instances[0]);
     requestAnimationFrame(this.dicomViewer.render);
 
-     this.resolveThumbnail(this.study.series[0].Instances[0]);
+     this.resolveThumbnail(this.study.series[0]);
   }.bind(this);
 
   private updateInstances = function(instance: Instance, serieN: number, instN: number) {
     this.study.series[serieN].Instances[instN] = instance;
     if(instN === 0) {
-      this.resolveThumbnail(instance);
+      this.resolveThumbnail(this.study.series[serieN]);
     }
   }.bind(this);
 
@@ -47,8 +47,8 @@ export class ViewportComponent implements OnInit {
     studyHelper.prepareStudy();
   }
 
-  public resolveThumbnail(instance: Instance) {
-    const src = new CanvasImageData(instance).canvas.toDataURL('image/png');
-    this.thumbnails.push(new Thumbnail(src, 'Description'));
+  public resolveThumbnail(serie: Serie) {
+    const src = new CanvasImageData(serie.Instances[0]).canvas.toDataURL('image/png');
+    this.thumbnails.push(new Thumbnail(src, serie.modality));
   }
 }
