@@ -36,7 +36,9 @@ export class ViewportComponent implements OnInit {
 
   private updateInstances = function(instance: Instance, serieN: number, instN: number) {
     this.study.series[serieN].Instances[instN] = instance;
-    this.resolveThumbnail(instance);
+    if(instN === 0) {
+      this.resolveThumbnail(instance);
+    }
   }.bind(this);
 
   ngOnInit() {
