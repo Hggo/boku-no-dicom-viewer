@@ -17,21 +17,17 @@ export class ViewportComponent implements OnInit {
 
   constructor(private studyService: StudyService) { }
 
-  private dicomViewer: DicomViewer;
+  public dicomViewer: DicomViewer;
   @Input() study: Study;
-  public instance: Instance;
   private leftToolBox: HTMLDivElement;
   public thumbnails: Thumbnail[];
 
   private initCanvas = function(study: Study) {
     this.study = study;
     this.leftToolBox = <HTMLDivElement> document.getElementById('leftToolbox');
-    const webglDiv = <HTMLDivElement> document.getElementById('webgl');
-
-    this.dicomViewer = new DicomViewer(webglDiv, this.study.series[0].Instances[0]);
     requestAnimationFrame(this.dicomViewer.render);
 
-     this.resolveThumbnail(this.study.series[0]);
+    this.resolveThumbnail(this.study.series[0]);
   }.bind(this);
 
   private updateInstances = function(instance: Instance, serieN: number, instN: number) {
@@ -44,6 +40,8 @@ export class ViewportComponent implements OnInit {
   ngOnInit() {
     this.thumbnails = [];
     const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas, this.updateInstances);
+    const webglDiv = <HTMLDivElement> document.getElementById('webgl');
+    this.dicomViewer = new DicomViewer(webglDiv, this.study);
     studyHelper.prepareStudy();
   }
 

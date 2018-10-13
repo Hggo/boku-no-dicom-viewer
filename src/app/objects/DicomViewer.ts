@@ -1,16 +1,22 @@
 import * as THREE from 'three';
 import Instance from '../model/Instance';
 import { DrawCanvas } from '../utils/DrawCanvas';
+import Study from '../model/Study';
+import ViewportAnnotations from './ViewportAnnotations';
 
 export class DicomViewer {
 
-    constructor(public webglDiv: HTMLDivElement, private instance: Instance) {
+    constructor(public webglDiv: HTMLDivElement, public study: Study) {
 
         this.zoom = 1;
+        this.frameIndex = this.serieIndex = 0;
+        this.annotations = new ViewportAnnotations();
 
         this.initRenderer();
         this.createScene();
     }
+
+    public annotations: ViewportAnnotations;
 
     private width: number;
     private height: number;
@@ -22,9 +28,12 @@ export class DicomViewer {
     public zoom: number;
     public panx: number;
     public pany: number;
+    public instance: Instance;
+    public frameIndex: number;
+    public serieIndex: number;
 
     public render = function () {
-        DrawCanvas.drawPixelData(this, this.instance);
+        DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[this.frameIndex]);
     }.bind(this);
 
     private initRenderer() {
@@ -45,8 +54,6 @@ export class DicomViewer {
 
     private initCamera(instance: Instance, mesh: THREE.MeshBasicMaterial) {
 
-        this.instance = instance;
-
         if (!this.camera) {
             this.fov = 75;
             this.camera = new THREE.PerspectiveCamera(this.fov, this.width / this.height, 0.1, 1000);
@@ -63,12 +70,23 @@ export class DicomViewer {
         this.camera.position.x = this.panx;
         this.camera.position.y = this.pany;
 
-        this.camera.fov = this.fov * this.zoom;
+        this.camera.fov = this.fov / this.zoom;
         this.camera.updateProjectionMatrix();
         this.renderer.render(this.scene, this.camera);
     }
 
+    initAnnotations(instance: Instance){
+        this.annotations.ww = instance.ww;
+        this.annotations.wc = instance.wc;
+        this.annotations.zoom = this.zoom;
+        this.annotations.patientName = this.study.patientName;
+        this.annotations.institutionName = this.study.institutionName;
+    }
+
     public initViewer(instance: Instance, texture: THREE.Texture) {
+
+        this.initAnnotations(instance);
+        this.instance = instance;
 
         this.plane = new THREE.PlaneGeometry(instance.cols, instance.rows);
 

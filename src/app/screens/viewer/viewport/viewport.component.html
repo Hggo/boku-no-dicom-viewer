@@ -12,13 +12,25 @@
     </div>
 
     <div id="webgl">
-        <div *ngIf="instance != null">
+        <div id="annotations">
+            <div class="unselectable tag-patient-name">
+                {{ dicomViewer.annotations.patientName }}
+            </div>
+
             <div class="unselectable tag-ww">
-                ww {{ instance.ww }}
+                WW {{ dicomViewer.annotations.ww }}
             </div>
 
             <div class="unselectable tag-wc">
-                wc {{ instance.wc }}
+                WC {{ dicomViewer.annotations.wc }}
+            </div>
+
+            <div class="unselectable tag-zoom">
+                ZOOM {{ dicomViewer.annotations.zoom }}
+            </div>
+
+            <div class="unselectable tag-institution-name">
+                {{ dicomViewer.annotations.institutionName }}
             </div>
         </div>
     </div>

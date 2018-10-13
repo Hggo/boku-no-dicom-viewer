@@ -12,7 +12,7 @@ export class ZoomButton extends DicomToolbarButton {
     }
 
     private treatZoom = function (direction: number) {
-        this.dicomViewer.zoom = direction > 0 ? this.dicomViewer.zoom * 1.1 : this.dicomViewer.zoom / 1.1;
+        this.dicomViewer.zoom = direction > 0 ? this.dicomViewer.zoom / 1.1 : this.dicomViewer.zoom * 1.1;
         this.dicomViewer.applyDistance();
         requestAnimationFrame(this.dicomViewer.render);
     }.bind(this);

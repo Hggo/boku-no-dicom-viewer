@@ -43,6 +43,12 @@
     float: right;
 }
 
+#annotations {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
 .unselectable {
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -54,14 +60,35 @@
 
 .tag-ww {
     position: absolute;
-    right: 50px;
-    bottom: 50px;
+    right: 10%;
+    bottom: 16%;
     color: yellow;
 }
 
 .tag-wc {
     position: absolute;
-    right: 50px;
-    bottom: 30px;
+    right: 10%;
+    bottom: 13%;
+    color: yellow;
+}
+
+.tag-zoom {
+    position: absolute;
+    right: 10%;
+    bottom: 10%;
+    color: yellow;
+}
+
+.tag-patient-name {
+    position: absolute;
+    left: 50px;
+    top: 30px;
+    color: yellow;
+}
+
+.tag-institution-name {
+    position: absolute;
+    right: 10%;
+    top: 30px;
     color: yellow;
 }
