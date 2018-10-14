@@ -1,5 +1,6 @@
 import { InstanceOrth } from 'src/app/interface/InstanceOrth';
 import { TagsOrth } from '../interface/TagsOrth';
+import Window from './Window';
 
 export default class Instance {
 
@@ -17,6 +18,8 @@ export default class Instance {
     private _rescaleIntercept: number;
 
     private _hasWindow: Boolean;
+
+    private _windows: Window[];
 
     constructor(instance: InstanceOrth) {
         if (instance) {
@@ -94,14 +97,6 @@ export default class Instance {
         this._cols = cols;
     }
 
-    get hasWindow(): Boolean {
-        return this._hasWindow;
-    }
-
-    set hasWindow(hasWindow: Boolean) {
-        this._hasWindow = hasWindow;
-    }
-
     get rescaleSlope(): number {
         return this._rescaleSlope;
     }
@@ -118,21 +113,41 @@ export default class Instance {
         this._rescaleIntercept = intercept;
     }
 
+    get hasWindow(): Boolean {
+        return this._hasWindow;
+    }
+
+    set hasWindow(hasWindow: Boolean) {
+        this._hasWindow = hasWindow;
+    }
+
     private initTags() {
 
-        try {
+        if(this.tags['0028,1051']) {
             this.ww = Number(this.tags['0028,1051'].Value);
             this.wc = Number(this.tags['0028,1050'].Value);
 
+            this._windows = [];
+            this._windows.push(new Window(this.ww, this.wc, "Window 1"));
             this.hasWindow = true;
-        } catch (err) {
+        }
+            
+        if(this.tags['5200,9229']){ // shared group modules
+            
+            const sgm = this.tags['5200,9229'].Value;
+            if(this.tags['5200,9229'].Value[0]['0028,9132']) { //frame voi lut
+                const lut = sgm[0]['0028,9132'].Value[0];
 
-            try {
-                this.ww = Number(this.tags['5200,9229'].Value[0]['0028,9132'].Value[0]['0028,1051'].Value);
-                this.wc = Number(this.tags['5200,9229'].Value[0]['0028,9132'].Value[0]['0028,1050'].Value);
-                this.hasWindow = true;
-            } catch (errr) {
-                this.hasWindow = false;
+                const ww = Number(lut['0028,1051'].Value);
+                const wc = Number(lut['0028,1050'].Value);
+
+                if(!this.hasWindow) {
+                    this.ww = ww;
+                    this.wc = wc;
+                    this.hasWindow = true;
+                }
+                
+                this._windows.push(new Window(ww, wc, "Lut 1"));
             }
         }
 
@@ -143,7 +158,6 @@ export default class Instance {
             this.rescaleSlope = 1;
             this.rescaleIntercept = 0;
         }
-
 
         this.cols = Number(this.tags['0028,0011'].Value);
         this.rows = Number(this.tags['0028,0010'].Value);

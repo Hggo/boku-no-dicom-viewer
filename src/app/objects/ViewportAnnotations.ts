@@ -10,11 +10,11 @@ export default class ViewportAnnotations {
          this._zoom = 1;
     }
 
-    get zoom(): number{
+    get zoom(): number {
         return Math.ceil(this._zoom * 100) / 100;
     }
 
-    set zoom(zoom: number){
+    set zoom(zoom: number) {
         this._zoom = zoom;
     }
 }
