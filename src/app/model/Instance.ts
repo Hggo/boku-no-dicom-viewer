@@ -21,6 +21,8 @@ export default class Instance {
 
     private _windows: Window[];
 
+    private _numberOfFrames: number;
+
     constructor(instance: InstanceOrth) {
         if (instance) {
             this.copyProperties(instance);
@@ -30,6 +32,12 @@ export default class Instance {
     private copyProperties(instance: InstanceOrth) {
         this._indexInSeries = instance.IndexInSeries;
         this._id = instance.ID;
+        
+        if(instance.MainDicomTags.NumberOfFrames) {
+            this._numberOfFrames = Number(instance.MainDicomTags.NumberOfFrames);
+        } else {
+            this._numberOfFrames = 1;
+        }
     }
 
     get id(): String {
@@ -127,6 +135,10 @@ export default class Instance {
 
     set windows(windows: Window[]) {
         this._windows = windows;
+    }
+
+    get numberOfFrames(): number{
+        return this._numberOfFrames;
     }
 
     private initTags() {

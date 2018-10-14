@@ -92,3 +92,10 @@
     top: 30px;
     color: yellow;
 }
+
+.tag-frame {
+    position: absolute;
+    left: 50px;
+    bottom: 10%;
+    color: yellow;
+}

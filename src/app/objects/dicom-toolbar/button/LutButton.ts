@@ -10,6 +10,9 @@ export class LutButton extends DicomToolbarButton {
         this.class = 'yellow';
         this.buttons = [];
         this.selectable = false;
-        dicomViewer.instance.windows.forEach(window => this.buttons.push(new ApplyLutButton(dicomViewer, window)));
+        
+        if(dicomViewer.instance.hasWindow){
+            dicomViewer.instance.windows.forEach(window => this.buttons.push(new ApplyLutButton(dicomViewer, window)));
+        }
     }
 }

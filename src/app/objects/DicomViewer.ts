@@ -10,7 +10,6 @@ export class DicomViewer {
 
         this.zoom = 1;
         this.frameIndex = this.serieIndex = 0;
-        this.annotations = new ViewportAnnotations();
 
         this.initRenderer();
         this.createScene();
@@ -76,11 +75,16 @@ export class DicomViewer {
     }
 
     initAnnotations(instance: Instance){
-        this.annotations.ww = instance.ww;
-        this.annotations.wc = instance.wc;
-        this.annotations.zoom = this.zoom;
-        this.annotations.patientName = this.study.patientName;
-        this.annotations.institutionName = this.study.institutionName;
+        const annotations = new ViewportAnnotations();
+        annotations.ww = instance.ww;
+        annotations.wc = instance.wc;
+        annotations.zoom = this.zoom;
+        annotations.patientName = this.study.patientName;
+        annotations.institutionName = this.study.institutionName;
+        annotations.totalFrames = instance.numberOfFrames;
+        annotations.indexFrames = 1;
+
+        this.annotations = annotations;
     }
 
     public initViewer(instance: Instance, texture: THREE.Texture) {

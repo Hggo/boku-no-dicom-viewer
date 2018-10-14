@@ -14,4 +14,5 @@ interface InstanceMainDicomTags {
     InstanceCreationTime: String;
     InstanceNumber: String;
     SOPInstanceUID: String;
+    NumberOfFrames: String;
 }

@@ -5,6 +5,8 @@ export default class ViewportAnnotations {
     private _zoom: number;
     public patientName: String;
     public institutionName: String;
+    public totalFrames: number;
+    public indexFrames: number;
 
     constructor () {
          this._zoom = 1;
@@ -16,5 +18,9 @@ export default class ViewportAnnotations {
 
     set zoom(zoom: number) {
         this._zoom = zoom;
+    }
+
+    get frame (): String {
+        return this.indexFrames + '/' + this.totalFrames;
     }
 }
