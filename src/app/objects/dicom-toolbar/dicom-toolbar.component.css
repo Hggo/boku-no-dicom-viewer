@@ -5,14 +5,44 @@
 
 .dicom-tool-button:hover {
     background-color: #073678;
+    position: relative;
 }
 
 .dicom-tool-button > fa-icon {
     margin-left: auto;
     margin-right: auto;
-    color: white;
 }
 
 .active {
     background-color: #073678;
+}
+
+.yellow {
+    color: yellow;
+}
+
+.white {
+    color: white;
+}
+
+.dropdown {
+    position: absolute;
+    list-style: none;
+    left: -9999px;
+}
+
+.dicom-tool-button:hover ul {
+    left: 0px;
+    padding-left: 0px;
+}
+
+ul .dicom-tool-button {
+    padding-top: 1px; /* Introducing a padding between the li and the a give the illusion spaced items */
+    float: none;
+}
+
+.dicom-tool-button:hover .dicom-tool-button { /* These create persistent hover states, meaning the top-most link stays 'hovered' even when your cursor has moved down the list. */
+    color: white;
+    background-color: #073678;
+    padding: 18px;
 }

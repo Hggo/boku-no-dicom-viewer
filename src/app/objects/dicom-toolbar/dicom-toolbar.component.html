@@ -1,4 +1,10 @@
-<button *ngFor="let button of dicomButtons; let i = index" class="pure-button dicom-tool-button" (click)="button.click()" 
-    [ngClass]="{'active': button.active}">
-  <fa-icon [icon]="button.icon" [size]="button.size" [fixedWidth]="button.fixedWidth"></fa-icon>
-</button>
+<div style="display: inline-block" *ngFor="let button of dicomButtons">
+  <button class="pure-button dicom-tool-button" (click)="button.click()" [ngClass]="{'active': button.active}">
+    <fa-icon [icon]="button.icon" [size]="button.size" [fixedWidth]="button.fixedWidth" [ngClass]="button.class"></fa-icon>
+    <ul *ngIf="button.buttons" class="dropdown">
+      <li *ngFor="let subbutton of button.buttons">
+        <button class="pure-button dicom-tool-button" (click)="subbutton.click()">{{ subbutton.title }}</button>
+      </li>
+    </ul>
+  </button>
+</div>

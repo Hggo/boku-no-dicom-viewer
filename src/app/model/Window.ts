@@ -1,5 +1,5 @@
 export default class Window {
-    constructor (private _ww: number, private _wc: number, private _description) {
+    constructor (private _ww: number, private _wc: number, private _description: string) {
 
     }
 
@@ -19,11 +19,11 @@ export default class Window {
         this._wc = wc;
     }
 
-    get description (): number{
+    get description (): string{
         return this._description;
     }
 
-    set description (description: number) {
+    set description (description: string) {
         this._description = description;
     }
 }

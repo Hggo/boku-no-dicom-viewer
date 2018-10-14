@@ -1,7 +1,7 @@
 <div id="viewport">
 
     <div id="topToolbox" style="height:10% !important">
-        <app-dicom-toolbar [dicomViewer]="dicomViewer" *ngIf="dicomViewer"></app-dicom-toolbar>
+        <app-dicom-toolbar [dicomViewer]="dicomViewer" *ngIf="dicomViewer != undefined && dicomViewer.instance != undefined"></app-dicom-toolbar>
     </div>
 
     <div id="leftToolbox">

@@ -121,6 +121,14 @@ export default class Instance {
         this._hasWindow = hasWindow;
     }
 
+    get windows(): Window[] {
+        return this._windows;
+    }
+
+    set windows(windows: Window[]) {
+        this._windows = windows;
+    }
+
     private initTags() {
 
         if(this.tags['0028,1051']) {
