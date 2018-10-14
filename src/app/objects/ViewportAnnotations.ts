@@ -21,6 +21,6 @@ export default class ViewportAnnotations {
     }
 
     get frame (): String {
-        return this.indexFrames + '/' + this.totalFrames;
+        return this.indexFrames + 1 + '/' + this.totalFrames;
     }
 }

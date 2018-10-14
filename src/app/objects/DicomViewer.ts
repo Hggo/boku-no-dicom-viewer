@@ -32,8 +32,12 @@ export class DicomViewer {
     public serieIndex: number;
 
     public render = function () {
-        DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[this.frameIndex]);
+        DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[0], this.frameIndex);
     }.bind(this);
+
+    public updateAnnotations(){
+
+    }
 
     private initRenderer() {
         this.height = window.innerHeight * 0.9;
@@ -82,7 +86,7 @@ export class DicomViewer {
         annotations.patientName = this.study.patientName;
         annotations.institutionName = this.study.institutionName;
         annotations.totalFrames = instance.numberOfFrames;
-        annotations.indexFrames = 1;
+        annotations.indexFrames = this.frameIndex;
 
         this.annotations = annotations;
     }

@@ -1,12 +1,12 @@
 import { InstanceOrth } from 'src/app/interface/InstanceOrth';
 import { TagsOrth } from '../interface/TagsOrth';
 import Window from './Window';
+import Frame from './Frame';
 
 export default class Instance {
 
     private _indexInSeries: Number;
     private _id: String;
-    private _pixelData: ArrayBuffer;
     private _tags: TagsOrth;
     private _ww: number;
     private _wc: number;
@@ -20,8 +20,9 @@ export default class Instance {
     private _hasWindow: Boolean;
 
     private _windows: Window[];
-
     private _numberOfFrames: number;
+
+    private _frames: Frame[];
 
     constructor(instance: InstanceOrth) {
         if (instance) {
@@ -37,6 +38,12 @@ export default class Instance {
             this._numberOfFrames = Number(instance.MainDicomTags.NumberOfFrames);
         } else {
             this._numberOfFrames = 1;
+        }
+
+        this._frames = [];
+
+        for(let i = 0; i < this._numberOfFrames; i++){
+            this._frames.push(new Frame(i));
         }
     }
 
@@ -56,12 +63,8 @@ export default class Instance {
         this._indexInSeries = indexInSeries;
     }
 
-    get pixelData(): ArrayBuffer {
-        return this._pixelData;
-    }
-
-    set pixelData(pixelData: ArrayBuffer) {
-        this._pixelData = pixelData;
+    get frames(): Frame[] {
+        return this._frames;
     }
 
     get tags(): TagsOrth {

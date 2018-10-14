@@ -7,7 +7,7 @@ export class CanvasImageData {
     public preview: ImageData;
     public canvas: HTMLCanvasElement;
 
-    constructor(private instance: Instance) {
+    constructor(private instance: Instance, frameIndex: number) {
 
         this.canvas = document.createElement('canvas');
         this.canvas.width = instance.cols;
@@ -19,15 +19,16 @@ export class CanvasImageData {
         let counter = 0;
         const pixelRepresentation = instance.tags['0028,0103'].Value;
         const bitsAlocated = instance.tags['0028,0100'].Value;
+        const pixelData = instance.frames[frameIndex].pixelData;
 
         if (pixelRepresentation === '0' && bitsAlocated === '8') {
-            this._pixelDataUInt = new Uint8Array(instance.pixelData);
+            this._pixelDataUInt = new Uint8Array(pixelData);
         } else if (pixelRepresentation === '1' && bitsAlocated === '8') {
-            this._pixelDataUInt = new Int8Array(instance.pixelData);
+            this._pixelDataUInt = new Int8Array(pixelData);
         } else if (pixelRepresentation === '0' && bitsAlocated === '16') {
-            this._pixelDataUInt = new Uint16Array(instance.pixelData);
+            this._pixelDataUInt = new Uint16Array(pixelData);
         } else if (pixelRepresentation === '1' && bitsAlocated === '16') {
-            this._pixelDataUInt = new Int16Array(instance.pixelData);
+            this._pixelDataUInt = new Int16Array(pixelData);
         }
 
         this._pixelData = new Uint8Array(instance.cols * instance.rows * 4);

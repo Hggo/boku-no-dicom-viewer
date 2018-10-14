@@ -6,6 +6,7 @@ import { AdjustWindowButton } from './button/AdjustWindowButton';
 import { ZoomButton } from './button/ZoomButton';
 import { PanButton } from './button/PanButton';
 import { LutButton } from './button/LutButton';
+import SeriesScrollButton from './button/SeriesScrollButton';
 
 
 @Component({
@@ -42,6 +43,6 @@ export class DicomToolbarComponent implements OnInit {
     this.dicomButtons.push(new DicomToolbarButton(faArrowsAltH, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
     this.dicomButtons.push(new DicomToolbarButton(faSquare, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
     this.dicomButtons.push(new DicomToolbarButton(faCircle, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
-    this.dicomButtons.push(new DicomToolbarButton(faLayerGroup, this.dicomViewer, this.unselectOthers, DicomToolbarButton.CLICKTYPE));
+    this.dicomButtons.push(new SeriesScrollButton(this.dicomViewer, this.unselectOthers));
   }
 }

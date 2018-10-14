@@ -6,8 +6,6 @@ import { ScrollButton } from './generic/ScroolButton';
 
 export class ZoomButton extends ScrollButton {
 
-    public wheelListener: MouseWheelListener;
-
     constructor(dicomViewer: DicomViewer, selecionar: Function) {
         super(faSearchPlus, dicomViewer, selecionar);
     }

@@ -30,9 +30,9 @@ export class ViewportComponent implements OnInit {
     this.resolveThumbnail(this.study.series[0]);
   }.bind(this);
 
-  private updateInstances = function(instance: Instance, serieN: number, instN: number) {
+  private updateInstances = function(instance: Instance, serieN: number, instN: number, frameN: number) {
     this.study.series[serieN].Instances[instN] = instance;
-    if(instN === 0) {
+    if(instN === 0 && frameN === 0) {
       this.resolveThumbnail(this.study.series[serieN]);
     }
   }.bind(this);
@@ -46,7 +46,7 @@ export class ViewportComponent implements OnInit {
   }
 
   public resolveThumbnail(serie: Serie) {
-    const src = new CanvasImageData(serie.Instances[0]).canvas.toDataURL('image/png');
+    const src = new CanvasImageData(serie.Instances[0], 0).canvas.toDataURL('image/png');
     this.thumbnails.push(new Thumbnail(src, serie.modality));
   }
 }

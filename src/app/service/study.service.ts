@@ -45,11 +45,11 @@ export class StudyService {
     });
   }
 
-  getPixelData(instance: Instance): Promise<Instance> {
-    return this.http.get('/instances/' + instance.id + '/frames/0/raw',  {
+  getPixelData(instance: Instance, frame: number): Promise<Instance> {
+    return this.http.get('/instances/' + instance.id + '/frames/' + frame + '/raw',  {
       responseType: 'arraybuffer'})
                     .then(res => {
-                      instance.pixelData = res.data;
+                      instance.frames[frame].pixelData = res.data;
                       return instance;
                     });
   }
