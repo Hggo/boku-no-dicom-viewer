@@ -146,11 +146,12 @@ export default class Instance {
 
     private initTags() {
 
+        this._windows = [];
+        
         if(this.tags['0028,1051']) {
             this.ww = Number(this.tags['0028,1051'].Value);
             this.wc = Number(this.tags['0028,1050'].Value);
 
-            this._windows = [];
             this._windows.push(new Window(this.ww, this.wc, "Window 1"));
             this.hasWindow = true;
         }
