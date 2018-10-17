@@ -14,8 +14,24 @@ export default class StudyHelper {
     public prepareStudy() {
         this.studyService.getSeriesFromStudy(this.study).then(series => {
             this.study.series = series;
-            this.resolveTheRest();
+            this.resolveFirst();
         });
+    }
+
+    private resolveFirst(){
+        this.studyService.getInstancesFromSerie(this.study.series[0]).then(instances => this.resolveFirstInstanceAndFrame(instances, 0));
+    }
+
+    private resolveFirstInstanceAndFrame(instances: Instance [], serieN: number){
+        this.study.series[serieN].Instances = instances;
+        
+        this.resolveTags(instances[0])
+                .then().then(insttags => {
+                    this.study.series[serieN].Instances[0] = insttags;
+        
+                    this.workingThreads++;
+                    this.resolvePixelData(insttags, serieN, 0, 0);
+                });
     }
 
     private resolvePixelData(instance: Instance, serieN: number, instN: number, frameN: number) {
@@ -27,21 +43,15 @@ export default class StudyHelper {
             
             if(frameN === 0 && instN === 0 && serieN === 0){                
                 this.firstTrigger(this.study);
+                this.resolveTheRest();
             } else {
                 this.finalTrigger(instance, serieN, instN, frameN);
             }
         });
     }
 
-    private resolveTags(instance: Instance, serieN: number, instN: number) {
-        this.studyService.getTags(instance).then(insttags => {
-            this.study.series[serieN].Instances[instN] = insttags;
-
-            for (let k = 0; k < instance.numberOfFrames; k++) {
-                this.workingThreads++;
-                this.resolvePixelData(instance, serieN, instN, k);
-            }
-        });
+    private resolveTags(instance: Instance) {
+        return this.studyService.getTags(instance);
     }
 
     private resolveTheRest() {
@@ -52,11 +62,27 @@ export default class StudyHelper {
     }
 
     private resolveInstances(instances: Instance[], serieN: number){
-        this.study.series[serieN].Instances = instances;
 
         for (let j = 0; j < instances.length; j++) {
             this.workingThreads++;
-            this.resolveTags(instances[j], serieN, j);
+            
+            this.resolveTags(instances[j])
+                .then(insttags => {
+                    let instance = this.study.series[serieN].Instances[j];
+                    if(instance){
+                        instance.tags = insttags.tags;
+                    } else {
+                        instance = insttags;
+                    }
+                    
+                    for (let k = 0; k < insttags.numberOfFrames; k++) {
+                        const frame = this.study.series[serieN].Instances[j].frames[k];
+                        if(!frame || !frame.pixelData){
+                            this.workingThreads++;
+                            this.resolvePixelData(insttags, serieN, j, k);
+                        }
+                    }
+                });
         }
     }
 }
