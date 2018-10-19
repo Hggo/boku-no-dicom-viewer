@@ -1,14 +1,18 @@
-import { DicomToolbarButton } from "./DicomToolbarButton";
-import { MouseWheelListener } from "../../../../utils/MouseWheelListener";
-import { DicomViewer } from "../../../DicomViewer";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { DicomToolbarButton } from './DicomToolbarButton';
+import { MouseWheelListener } from '../../../../utils/MouseWheelListener';
+import { DicomViewer } from '../../../DicomViewer';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export class ScrollButton extends DicomToolbarButton {
-    protected wheelListener: MouseWheelListener;
 
     constructor(icon: IconDefinition, dicomViewer: DicomViewer, selecionar: Function) {
         super(icon, dicomViewer, selecionar, DicomToolbarButton.WHEELTYPE);
     }
+    protected wheelListener: MouseWheelListener;
+
+    protected treatScroll = function(direction: number) {
+        throw new Error('Not implemented');
+    }.bind(this);
 
     public treatClick() {
         this.active = true;
@@ -23,8 +27,4 @@ export class ScrollButton extends DicomToolbarButton {
             this.wheelListener.removeListeners();
         }
     }
-
-    protected treatScroll = function(direction: number) {
-        throw new Error('Not implemented');
-    }.bind(this);
 }

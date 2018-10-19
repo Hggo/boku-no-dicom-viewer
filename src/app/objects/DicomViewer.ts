@@ -35,7 +35,7 @@ export class DicomViewer {
         DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[0], this.frameIndex);
     }.bind(this);
 
-    public updateAnnotations(){
+    public updateAnnotations() {
 
     }
 
@@ -78,7 +78,7 @@ export class DicomViewer {
         this.renderer.render(this.scene, this.camera);
     }
 
-    initAnnotations(instance: Instance){
+    initAnnotations(instance: Instance) {
         const annotations = new ViewportAnnotations();
         annotations.ww = instance.ww;
         annotations.wc = instance.wc;

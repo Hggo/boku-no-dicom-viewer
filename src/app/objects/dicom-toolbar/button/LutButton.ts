@@ -1,7 +1,7 @@
-import { DicomViewer } from "../../DicomViewer";
-import { faAdjust } from "@fortawesome/free-solid-svg-icons";
-import { DicomToolbarButton } from "./generic/DicomToolbarButton";
-import { ApplyLutButton } from "./ApplyLutButton";
+import { DicomViewer } from '../../DicomViewer';
+import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { DicomToolbarButton } from './generic/DicomToolbarButton';
+import { ApplyLutButton } from './ApplyLutButton';
 
 export class LutButton extends DicomToolbarButton {
 
@@ -10,8 +10,8 @@ export class LutButton extends DicomToolbarButton {
         this.class = 'yellow';
         this.buttons = [];
         this.selectable = false;
-        
-        if(dicomViewer.instance.hasWindow){
+
+        if (dicomViewer.instance.hasWindow) {
             dicomViewer.instance.windows.forEach(window => this.buttons.push(new ApplyLutButton(dicomViewer, window)));
         }
     }

@@ -1,7 +1,7 @@
-import { DicomViewer } from "../../DicomViewer";
-import { faAdjust } from "@fortawesome/free-solid-svg-icons";
-import { DicomToolbarButton } from "./generic/DicomToolbarButton";
-import Window from "../../../model/Window";
+import { DicomViewer } from '../../DicomViewer';
+import { faAdjust } from '@fortawesome/free-solid-svg-icons';
+import { DicomToolbarButton } from './generic/DicomToolbarButton';
+import Window from '../../../model/Window';
 
 export class ApplyLutButton extends DicomToolbarButton {
 

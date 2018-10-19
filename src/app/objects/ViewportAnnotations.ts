@@ -1,5 +1,5 @@
 export default class ViewportAnnotations {
-    
+
     public ww: number;
     public wc: number;
     private _zoom: number;

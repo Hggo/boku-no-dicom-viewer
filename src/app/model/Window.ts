@@ -3,7 +3,7 @@ export default class Window {
 
     }
 
-    get ww (): number{
+    get ww (): number {
         return this._ww;
     }
 
@@ -11,7 +11,7 @@ export default class Window {
         this._ww = ww;
     }
 
-    get wc (): number{
+    get wc (): number {
         return this._wc;
     }
 
@@ -19,7 +19,7 @@ export default class Window {
         this._wc = wc;
     }
 
-    get description (): string{
+    get description (): string {
         return this._description;
     }
 

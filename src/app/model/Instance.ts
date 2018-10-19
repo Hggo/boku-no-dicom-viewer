@@ -33,8 +33,8 @@ export default class Instance {
     private copyProperties(instance: InstanceOrth) {
         this._indexInSeries = instance.IndexInSeries;
         this._id = instance.ID;
-        
-        if(instance.MainDicomTags.NumberOfFrames) {
+
+        if (instance.MainDicomTags.NumberOfFrames) {
             this._numberOfFrames = Number(instance.MainDicomTags.NumberOfFrames);
         } else {
             this._numberOfFrames = 1;
@@ -42,7 +42,7 @@ export default class Instance {
 
         this._frames = [];
 
-        for(let i = 0; i < this._numberOfFrames; i++){
+        for (let i = 0; i < this._numberOfFrames; i++) {
             this._frames.push(new Frame(i));
         }
     }
@@ -140,38 +140,38 @@ export default class Instance {
         this._windows = windows;
     }
 
-    get numberOfFrames(): number{
+    get numberOfFrames(): number {
         return this._numberOfFrames;
     }
 
     private initTags() {
 
         this._windows = [];
-        
-        if(this.tags['0028,1051']) {
+
+        if (this.tags['0028,1051']) {
             this.ww = Number(this.tags['0028,1051'].Value);
             this.wc = Number(this.tags['0028,1050'].Value);
 
-            this._windows.push(new Window(this.ww, this.wc, "Window 1"));
+            this._windows.push(new Window(this.ww, this.wc, 'Window 1'));
             this.hasWindow = true;
         }
-            
-        if(this.tags['5200,9229']){ // shared group modules
-            
+
+        if (this.tags['5200,9229']) { // shared group modules
+
             const sgm = this.tags['5200,9229'].Value;
-            if(this.tags['5200,9229'].Value[0]['0028,9132']) { //frame voi lut
+            if (this.tags['5200,9229'].Value[0]['0028,9132']) { // frame voi lut
                 const lut = sgm[0]['0028,9132'].Value[0];
 
                 const ww = Number(lut['0028,1051'].Value);
                 const wc = Number(lut['0028,1050'].Value);
 
-                if(!this.hasWindow) {
+                if (!this.hasWindow) {
                     this.ww = ww;
                     this.wc = wc;
                     this.hasWindow = true;
                 }
-                
-                this._windows.push(new Window(ww, wc, "Lut 1"));
+
+                this._windows.push(new Window(ww, wc, 'Lut 1'));
             }
         }
 

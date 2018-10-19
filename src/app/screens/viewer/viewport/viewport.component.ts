@@ -31,15 +31,15 @@ export class ViewportComponent implements OnInit {
   }.bind(this);
 
   private updateInstances = function(instance: Instance, serieN: number, instN: number, frameN: number) {
-    
-      if(this.study.series[serieN].Instances[instN] == undefined){
+
+      if (this.study.series[serieN].Instances[instN] === undefined) {
         this.study.series[serieN].Instances[instN] = instance;
       } else {
         this.study.series[serieN].Instances[instN].frames[frameN] = instance.frames[frameN];
       }
-      
-      if(frameN === 0) {
-        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN]); 
+
+      if (frameN === 0) {
+        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN]);
       }
   }.bind(this);
 

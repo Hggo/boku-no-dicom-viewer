@@ -7,7 +7,7 @@ export default class Frame {
     }
 
     get index (): number {
-        return this._index
+        return this._index;
     }
 
     get pixelData (): ArrayBuffer {

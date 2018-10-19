@@ -25,7 +25,7 @@ export class DicomToolbarButton {
     }
 
     public click() {
-        if(this.selectable) {
+        if (this.selectable) {
             this.selecionar(this);
         }
         this.treatClick();
