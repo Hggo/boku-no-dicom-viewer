@@ -1,5 +1,7 @@
 # Boku No Dicom Viewer
 
+![Viewer demo](https://raw.githubusercontent.com/Hggo/boku-no-dicom-viewer/master/demo.gif)
+
 This viewer consumes Orthanc rest api, it may be necessary to run it in serve folders or in some other way to bypass Orthanc's CORS restrictions:
 
 http://book.orthanc-server.com/faq/same-origin.html
