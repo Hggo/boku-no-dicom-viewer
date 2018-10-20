@@ -27,7 +27,7 @@ export class ViewportComponent implements OnInit {
     this.leftToolBox = <HTMLDivElement> document.getElementById('leftToolbox');
     requestAnimationFrame(this.dicomViewer.render);
 
-    this.resolveThumbnail(this.study.series[0], this.study.series[0].Instances[0]);
+    this.resolveThumbnail(this.study.series[0], this.study.series[0].Instances[0], 0, 0);
   }.bind(this);
 
   private updateInstances = function(instance: Instance, serieN: number, instN: number, frameN: number) {
@@ -39,7 +39,7 @@ export class ViewportComponent implements OnInit {
       }
 
       if (frameN === 0) {
-        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN]);
+        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN], serieN, instN);
       }
   }.bind(this);
 
@@ -51,8 +51,22 @@ export class ViewportComponent implements OnInit {
     studyHelper.prepareStudy();
   }
 
-  public resolveThumbnail(serie: Serie, instance: Instance) {
+  public resolveThumbnail(serie: Serie, instance: Instance, serieN, instN) {
     const src = new CanvasImageData(instance, 0).canvas.toDataURL('image/png');
-    this.thumbnails.push(new Thumbnail(src, serie.modality));
+    this.thumbnails.push(new Thumbnail(src, serie.modality, serieN, instN));
+  }
+
+  drag (thumbnail: Thumbnail) {
+    this.dicomViewer.serieIndex = thumbnail.serieIndex;
+    this.dicomViewer.instanceIndex = thumbnail.instanceIndex;
+    this.dicomViewer.frameIndex = 0;
+  }
+
+  drop (evt) {
+    this.dicomViewer.render();
+  }
+
+  allowDrop(ev) {
+    ev.preventDefault();
   }
 }

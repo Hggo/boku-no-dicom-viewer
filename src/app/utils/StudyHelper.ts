@@ -63,6 +63,10 @@ export default class StudyHelper {
 
     private resolveInstances(instances: Instance[], serieN: number) {
 
+        if (!this.study.series[serieN].Instances) {
+            this.study.series[serieN].Instances = instances;
+        }
+
         for (let j = 0; j < instances.length; j++) {
             this.workingThreads++;
 

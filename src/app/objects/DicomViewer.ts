@@ -9,7 +9,7 @@ export class DicomViewer {
     constructor(public webglDiv: HTMLDivElement, public study: Study) {
 
         this.zoom = 1;
-        this.frameIndex = this.serieIndex = 0;
+        this.frameIndex = this.serieIndex = this.instanceIndex = 0;
 
         this.initRenderer();
         this.createScene();
@@ -29,10 +29,11 @@ export class DicomViewer {
     public pany: number;
     public instance: Instance;
     public frameIndex: number;
+    public instanceIndex: number;
     public serieIndex: number;
 
     public render = function () {
-        DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[0], this.frameIndex);
+        DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[this.instanceIndex], this.frameIndex);
     }.bind(this);
 
     public updateAnnotations() {
