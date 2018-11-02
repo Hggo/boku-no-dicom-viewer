@@ -1,0 +1,11 @@
+{
+    "/orthanc/*": {
+      "target": "http://localhost:8042",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/orthanc": ""
+      }
+    }
+}

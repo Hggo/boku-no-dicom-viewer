@@ -18,7 +18,7 @@ import { ViewportComponent } from './screens/viewer/viewport/viewport.component'
 export class Http {}
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8042',
+  baseURL: '/orthanc',
   timeout: 99999999999,
   withCredentials: true,
   headers: {
