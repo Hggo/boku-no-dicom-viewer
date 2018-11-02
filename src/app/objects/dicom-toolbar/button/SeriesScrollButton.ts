@@ -5,6 +5,7 @@ import { faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 export default class SeriesScrollButton extends ScrollButton {
     constructor (dicomViewer: DicomViewer, selecionar: Function) {
         super(faLayerGroup, dicomViewer, selecionar);
+        this.treatClick();
     }
 
     protected treatScroll = function (direction: number) {
