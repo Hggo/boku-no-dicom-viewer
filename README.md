@@ -10,7 +10,7 @@ http://book.orthanc-server.com/faq/same-origin.html
 
 Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-It does a proxy to `http://localhost:8042/` where you should have a orthanc instance running.
+It does a proxy to `http://localhost:8042/` where you should have an orthanc instance running.
 
 # Run it together with an Orthanc instance on Docker
 
