@@ -6,6 +6,12 @@ This viewer consumes Orthanc rest api, it may be necessary to run it in serve fo
 
 http://book.orthanc-server.com/faq/same-origin.html
 
+# Run it locally for development
+
+Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+It does a proxy to `http://localhost:8042/` where you should have a orthanc instance running.
+
 # Run it together with an Orthanc instance on Docker
 
  In this method there should be no CORS problems
@@ -21,10 +27,6 @@ http://book.orthanc-server.com/faq/same-origin.html
  5. docker-compose up -d
  
  6. Navigate to `http://localhost:8042/bndv/index.html`
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Build
 
