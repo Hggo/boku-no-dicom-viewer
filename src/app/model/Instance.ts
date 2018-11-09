@@ -1,7 +1,7 @@
-import { InstanceOrth } from 'src/app/interface/InstanceOrth';
-import { TagsOrth } from '../interface/TagsOrth';
 import Window from './Window';
 import Frame from './Frame';
+import { TagsOrth } from 'src/app/interface/orthanc/TagsOrth';
+import { InstanceOrth } from 'src/app/interface/orthanc/InstanceOrth';
 
 export default class Instance {
 

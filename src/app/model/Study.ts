@@ -1,5 +1,5 @@
 import Instance from './Instance';
-import { StudyOrth } from 'src/app/interface/StudyOrth';
+import { StudyOrth } from 'src/app/interface/orthanc/StudyOrth';
 import Serie from './Serie';
 
 export default class Study {

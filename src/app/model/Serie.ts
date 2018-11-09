@@ -1,4 +1,4 @@
-import { SerieOrth } from '../interface/SerieOrth';
+import { SerieOrth } from '../interface/orthanc/SerieOrth';
 import Instance from './Instance';
 
 export default class Serie {
