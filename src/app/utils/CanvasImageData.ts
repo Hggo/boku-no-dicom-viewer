@@ -17,17 +17,17 @@ export class CanvasImageData {
         this.preview = ctx.createImageData(instance.cols, instance.rows);
 
         let counter = 0;
-        const pixelRepresentation = instance.tags['0028,0103'].Value;
-        const bitsAlocated = instance.tags['0028,0100'].Value;
+        const pixelRepresentation = instance.pixelRepresentation;
+        const bitsAlocated = instance.bitsAlocated;
         const pixelData = instance.frames[frameIndex].pixelData;
 
-        if (pixelRepresentation === '0' && bitsAlocated === '8') {
+        if (pixelRepresentation === 0 && bitsAlocated === 8) {
             this._pixelDataUInt = new Uint8Array(pixelData);
-        } else if (pixelRepresentation === '1' && bitsAlocated === '8') {
+        } else if (pixelRepresentation === 1 && bitsAlocated === 8) {
             this._pixelDataUInt = new Int8Array(pixelData);
-        } else if (pixelRepresentation === '0' && bitsAlocated === '16') {
+        } else if (pixelRepresentation === 0 && bitsAlocated === 16) {
             this._pixelDataUInt = new Uint16Array(pixelData);
-        } else if (pixelRepresentation === '1' && bitsAlocated === '16') {
+        } else if (pixelRepresentation === 1 && bitsAlocated === 16) {
             this._pixelDataUInt = new Int16Array(pixelData);
         }
 
@@ -53,7 +53,7 @@ export class CanvasImageData {
     }
 
     private applyPhotometricInterpretation(pixel: number): number {
-        if (this.instance.tags['0028,0004'].Value === 'MONOCHROME1') {
+        if (this.instance.photometricInterpretation === 0) {
             return 255 - pixel;
         } else {
             return pixel;

@@ -4,6 +4,7 @@ import { AxiosInstance } from 'axios';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
 import Serie from '../model/Serie';
+import { TagsOrth } from '../interface/orthanc/TagsOrth';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,9 @@ export class StudyService {
                     .then(res => res.data.map(instance => new Instance(instance)));
   }
 
-  getTags(instance: Instance): Promise<Instance> {
+  getTags(instance: Instance): Promise<TagsOrth> {
     return this.http.get('/instances/' + instance.id + '/tags').then(res => {
-      instance.tags = res.data;
-      return instance;
+      return res.data;
     });
   }
 
