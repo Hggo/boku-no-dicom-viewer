@@ -3,8 +3,6 @@ import { Http } from '../app.module';
 import { AxiosInstance } from 'axios';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
-import { TagsOrth } from '../interface/TagsOrth';
-import { SerieOrth } from '../interface/SerieOrth';
 import Serie from '../model/Serie';
 
 @Injectable({
