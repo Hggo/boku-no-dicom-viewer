@@ -1,11 +1,8 @@
 import { DicomViewer } from '../objects/DicomViewer';
 
 export class MouseWheelListener {
-
     constructor(private dicomViewer: DicomViewer, private tratar: Function) {
-
     }
-
     mouseWheelHandler = function (e: MouseWheelEvent) {
         if (e.deltaY > 0) {
             this.tratar(1);

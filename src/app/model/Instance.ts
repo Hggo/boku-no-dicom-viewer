@@ -4,7 +4,6 @@ import { TagsOrth } from 'src/app/interface/orthanc/TagsOrth';
 import { InstanceOrth } from 'src/app/interface/orthanc/InstanceOrth';
 
 export default class Instance {
-
     public indexInSeries: Number;
     public id: String;
     public ww: number;

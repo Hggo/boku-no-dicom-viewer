@@ -1,19 +1,17 @@
-import Instance from './Instance';
 import { StudyOrth } from 'src/app/interface/orthanc/StudyOrth';
 import Serie from './Serie';
 
 export default class Study {
-
-    private _id: String;
-    private _institutionName: String;
-    private _referringPhysicianName: String;
-    private _studyDate: String;
-    private _studyDescription: String;
-    private _studyInstanceUID: String;
-    private _studyTime: String;
-    private _numberSeries: Number;
-    private _patientName: String;
-    private _series: Serie[];
+    public id: String;
+    public institutionName: String;
+    public referringPhysicianName: String;
+    public studyDate: String;
+    public studyDescription: String;
+    public studyInstanceUID: String;
+    public studyTime: String;
+    public numberSeries: Number;
+    public patientName: String;
+    public series: Serie[];
 
     constructor(study: StudyOrth) {
         if (study) {
@@ -22,100 +20,20 @@ export default class Study {
     }
 
     private copyProperties(study: StudyOrth) {
-
-        this._id = study.ID;
-
+        this.id = study.ID;
         if (study.MainDicomTags !== undefined) {
-            this._institutionName = study.MainDicomTags.InstitutionName;
-            this._referringPhysicianName = study.MainDicomTags.ReferringPhysicianName;
-            this._studyDate = study.MainDicomTags.StudyDate;
-            this._studyDescription = study.MainDicomTags.StudyDescription;
-            this._studyInstanceUID = study.MainDicomTags.StudyInstanceUID;
-            this._studyTime = study.MainDicomTags.StudyTime;
+            this.institutionName = study.MainDicomTags.InstitutionName;
+            this.referringPhysicianName = study.MainDicomTags.ReferringPhysicianName;
+            this.studyDate = study.MainDicomTags.StudyDate;
+            this.studyDescription = study.MainDicomTags.StudyDescription;
+            this.studyInstanceUID = study.MainDicomTags.StudyInstanceUID;
+            this.studyTime = study.MainDicomTags.StudyTime;
         }
-
         if (study.Series !== undefined) {
-            this._numberSeries = study.Series.length;
+            this.numberSeries = study.Series.length;
         }
-
         if (study.PatientMainDicomTags) {
-            this._patientName = study.PatientMainDicomTags.PatientName;
+            this.patientName = study.PatientMainDicomTags.PatientName;
         }
-    }
-
-    get id(): String {
-        return this._id;
-    }
-
-    get institutionName(): String {
-        return this._institutionName;
-    }
-
-    set institutionName(institutionName: String) {
-        this._institutionName = institutionName;
-    }
-
-    get referringPhysicianName(): String {
-        return this._referringPhysicianName;
-    }
-
-    set referringPhysicianName(referringPhysicianName: String) {
-        this._referringPhysicianName = referringPhysicianName;
-    }
-
-    get studyDate(): String {
-        return this._studyDate;
-    }
-
-    set studyDate(studyDate: String) {
-        this._studyDate = studyDate;
-    }
-
-    get studyDescription(): String {
-        return this._studyDescription;
-    }
-
-    set studyDescription(studyDescription: String) {
-        this._studyDescription = studyDescription;
-    }
-
-    get studyInstanceUID(): String {
-        return this._studyInstanceUID;
-    }
-
-    set studyInstanceUID(studyInstanceUID: String) {
-        this._studyInstanceUID = studyInstanceUID;
-    }
-
-    get studyTime(): String {
-        return this._studyTime;
-    }
-
-    set studyTime(studyTime: String) {
-        this._studyTime = studyTime;
-    }
-
-    get numberSeries(): Number {
-        return this._numberSeries;
-    }
-
-    set numberSeries(numberSeries: Number) {
-        this._numberSeries = numberSeries;
-    }
-
-    get patientName(): String {
-        return this._patientName;
-    }
-
-    set patientName(patientName: String) {
-        this._patientName = patientName;
-    }
-
-    get series(): Serie[] {
-        return this._series;
-    }
-
-    set series(series: Serie[]) {
-        this._series = series;
     }
 }

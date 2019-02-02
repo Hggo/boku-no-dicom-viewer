@@ -1,13 +1,10 @@
 import { DicomViewer } from '../objects/DicomViewer';
 
 export class MouseListener {
-
-    constructor(private dicomViewer: DicomViewer, private tratar: Function) {
-
-    }
-
     private lastX: number;
     private lastY: number;
+    constructor(private dicomViewer: DicomViewer, private tratar: Function) {
+    }
 
     handle_keydown = function (e) {
         this.dicomViewer.webglDiv.addEventListener('mousemove', this.mouseMoveHandler);
@@ -24,14 +21,12 @@ export class MouseListener {
         const deltaY = e.pageY - this.lastY;
         this.lastX = e.pageX;
         this.lastY = e.pageY;
-
         this.tratar(deltaX, deltaY);
     }.bind(this);
 
     applyListen =  function (e) {
         this.lastX = e.pageX;
         this.lastY = e.pageY;
-
         this.handle_keydown(e);
     }.bind(this);
 

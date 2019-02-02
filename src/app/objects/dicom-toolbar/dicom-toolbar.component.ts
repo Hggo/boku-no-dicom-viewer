@@ -8,7 +8,6 @@ import { PanButton } from './button/PanButton';
 import { LutButton } from './button/LutButton';
 import SeriesScrollButton from './button/SeriesScrollButton';
 
-
 @Component({
   selector: 'app-dicom-toolbar',
   templateUrl: './dicom-toolbar.component.html',

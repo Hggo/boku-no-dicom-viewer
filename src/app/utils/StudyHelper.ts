@@ -1,10 +1,8 @@
-import Serie from '../model/Serie';
 import { StudyService } from '../service/study.service';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
 
 export default class StudyHelper {
-
     constructor(private study: Study, private studyService: StudyService, private firstTrigger: Function, private finalTrigger: Function) {
     }
 
@@ -17,9 +15,7 @@ export default class StudyHelper {
 
     private resolvePixelData(instance: Instance, serieN: number, instN: number, frameN: number) {
         this.studyService.getPixelData(instance, frameN).then(instpd => {
-
             this.study.series[serieN].Instances[instN].frames[frameN].pixelData = instpd.frames[frameN].pixelData;
-
             if (frameN === 0 && instN === 0 && serieN === 0) {
                 this.firstTrigger(this.study);
             } else {
@@ -40,13 +36,10 @@ export default class StudyHelper {
     }
 
     private resolveInstances(instances: Instance[], serieN: number) {
-
         if (!this.study.series[serieN].Instances) {
             this.study.series[serieN].Instances = instances;
         }
-
         for (let j = 0; j < instances.length; j++) {
-
             this.resolveTags(instances[j])
                 .then(insttags => {
                     let instance = this.study.series[serieN].Instances[j];
