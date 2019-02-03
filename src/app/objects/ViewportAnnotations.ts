@@ -1,5 +1,4 @@
 export default class ViewportAnnotations {
-
     public ww: number;
     public wc: number;
     public patientName: String;

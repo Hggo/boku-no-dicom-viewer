@@ -1,7 +1,7 @@
-import Window from './Window';
-import Frame from './Frame';
 import { TagsOrth } from 'src/app/interface/orthanc/TagsOrth';
 import { InstanceOrth } from 'src/app/interface/orthanc/InstanceOrth';
+import Window from './Window';
+import Frame from './Frame';
 
 export default class Instance {
     public indexInSeries: Number;

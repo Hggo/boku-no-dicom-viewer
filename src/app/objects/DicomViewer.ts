@@ -1,16 +1,10 @@
-import * as THREE from 'three';
-import Instance from '../model/Instance';
 import { DrawCanvas } from '../utils/DrawCanvas';
+import Instance from '../model/Instance';
 import Study from '../model/Study';
 import ViewportAnnotations from './ViewportAnnotations';
+import * as THREE from 'three';
 
 export class DicomViewer {
-    constructor(public webglDiv: HTMLDivElement, public study: Study) {
-        this.zoom = 1;
-        this.frameIndex = this.serieIndex = this.instanceIndex = 0;
-        this.initRenderer();
-        this.createScene();
-    }
     public annotations: ViewportAnnotations;
     public renderer: THREE.WebGLRenderer;
     public zoom: number;
@@ -26,6 +20,12 @@ export class DicomViewer {
     private camera: THREE.PerspectiveCamera;
     private scene: THREE.Scene;
     private fov: number;
+    constructor(public webglDiv: HTMLDivElement, public study: Study) {
+        this.zoom = 1;
+        this.frameIndex = this.serieIndex = this.instanceIndex = 0;
+        this.initRenderer();
+        this.createScene();
+    }
 
     public render = function () {
         DrawCanvas.drawPixelData(this, this.study.series[this.serieIndex].Instances[this.instanceIndex], this.frameIndex);
