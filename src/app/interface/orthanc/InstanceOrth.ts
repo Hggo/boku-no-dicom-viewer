@@ -1,18 +1,18 @@
 export interface InstanceOrth {
-    ID: String;
+    ID: string;
     FileSize: Number;
-    FileUuid: String;
+    FileUuid: string;
     IndexInSeries: Number;
-    ParentSeries: String;
-    Type: String;
+    ParentSeries: string;
+    Type: string;
     MainDicomTags: InstanceMainDicomTags;
 }
 
 interface InstanceMainDicomTags {
     ImageIndex: Number;
-    InstanceCreationDate: String;
-    InstanceCreationTime: String;
-    InstanceNumber: String;
-    SOPInstanceUID: String;
-    NumberOfFrames: String;
+    InstanceCreationDate: string;
+    InstanceCreationTime: string;
+    InstanceNumber: string;
+    SOPInstanceUID: string;
+    NumberOfFrames: string;
 }

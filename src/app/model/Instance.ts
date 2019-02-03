@@ -5,7 +5,7 @@ import Frame from './Frame';
 
 export default class Instance {
     public indexInSeries: Number;
-    public id: String;
+    public id: string;
     public ww: number;
     public wc: number;
     public cols: number;

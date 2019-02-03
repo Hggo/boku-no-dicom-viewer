@@ -10,14 +10,14 @@ export interface TagsOrth {
 }
 
 interface TagValue {
-    Name: String;
-    Type: String;
-    Value: String;
+    Name: string;
+    Type: string;
+    Value: string;
 }
 
 interface SharedFunctionalGroupsSequence {
-    Name: String;
-    Type: String;
+    Name: string;
+    Type: string;
     Value: TagValueArray[];
 }
 
@@ -27,8 +27,8 @@ interface TagValueArray {
 }
 
 interface TagRescale {
-    Name: String;
-    Type: String;
+    Name: string;
+    Type: string;
     Value: RescaleTags[];
 }
 
@@ -38,8 +38,8 @@ interface RescaleTags {
 }
 
 interface TagValueLut {
-    Name: String;
-    Type: String;
+    Name: string;
+    Type: string;
     Value: Lut[];
 }
 

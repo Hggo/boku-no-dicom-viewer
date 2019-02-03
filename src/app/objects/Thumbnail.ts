@@ -1,9 +1,9 @@
 export default class Thumbnail {
-    public src: String;
-    public title: String;
+    public src: string;
+    public title: string;
     public serieIndex: number; 
     public instanceIndex: number;
-    constructor (src: String, title: String, serieIndex: number, instanceIndex: number) {
+    constructor (src: string, title: string, serieIndex: number, instanceIndex: number) {
         this.src = src;
         this.title = title;
         this.serieIndex = serieIndex;

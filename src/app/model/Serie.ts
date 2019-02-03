@@ -2,10 +2,10 @@ import { SerieOrth } from '../interface/orthanc/SerieOrth';
 import Instance from './Instance';
 
 export default class Serie {
-    public ID: String;
-    public InstancesIds: String[];
+    public ID: string;
+    public InstancesIds: string[];
     public Instances: Instance[];
-    public Modality: String;
+    public Modality: string;
 
     constructor(serie: SerieOrth) {
         if (serie) {
