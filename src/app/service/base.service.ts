@@ -5,12 +5,13 @@ export default class BaseService {
     constructor (protected http: AxiosInstance) {
     }
 
-    protected post (query: HttpQuery) {
-        return this.http.post(query.Url, query.body);
+    protected post (query: HttpQuery, classs: any) {
+        return this.http.post(query.Url, query.body).
+            then(res => this.listToClass(res, classs));
     }
 
     protected get (query: HttpQuery) {
-        return this.http.get(query.Url, query.body);
+        return this.http.get(query.Url, query.body).then(res => res.data);
     }
 
     protected listToClass(response: any, classs: any) {

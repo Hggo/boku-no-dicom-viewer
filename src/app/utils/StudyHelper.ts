@@ -14,8 +14,8 @@ export default class StudyHelper {
     }
 
     private resolvePixelData(instance: Instance, serieN: number, instN: number, frameN: number) {
-        this.studyService.getPixelData(instance, frameN).then(instpd => {
-            this.study.series[serieN].Instances[instN].frames[frameN].pixelData = instpd.frames[frameN].pixelData;
+        this.studyService.getPixelData(instance, frameN).then(frame => {
+            this.study.series[serieN].Instances[instN].frames[frameN].pixelData = frame;
             if (frameN === 0 && instN === 0 && serieN === 0) {
                 this.firstTrigger(this.study);
             } else {
