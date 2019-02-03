@@ -3,9 +3,7 @@ import { faArrowsAlt } from '@fortawesome/free-solid-svg-icons';
 import { DicomViewer } from '../../DicomViewer';
 import { MouseClickAndDragButton } from './generic/MouseClickAndDragButton';
 
-
 export class PanButton extends MouseClickAndDragButton {
-
     constructor(dicomViewer: DicomViewer, selecionar: Function) {
         super(faArrowsAlt, dicomViewer, selecionar, DicomToolbarButton.CLICKTYPE);
     }

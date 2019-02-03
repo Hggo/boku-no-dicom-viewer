@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StudyService } from '../../service/study.service';
-import Study from '../../model/Study';
 import { NgxSmartModalService } from 'ngx-smart-modal';
+import Study from '../../model/Study';
 
 @Component({
   selector: 'app-pesquisa',
@@ -10,7 +10,6 @@ import { NgxSmartModalService } from 'ngx-smart-modal';
 })
 export class PesquisaComponent implements OnInit {
   studyList: Study[];
-
   constructor(private studyService: StudyService, public ngxSmartModalService: NgxSmartModalService) { }
 
   ngOnInit() {

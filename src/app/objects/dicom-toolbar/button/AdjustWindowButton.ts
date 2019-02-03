@@ -3,9 +3,7 @@ import { faAdjust } from '@fortawesome/free-solid-svg-icons';
 import { DicomViewer } from '../../DicomViewer';
 import { MouseClickAndDragButton } from './generic/MouseClickAndDragButton';
 
-
 export class AdjustWindowButton extends MouseClickAndDragButton {
-
     constructor(dicomViewer: DicomViewer, selecionar: Function) {
         super(faAdjust, dicomViewer, selecionar, DicomToolbarButton.CLICKTYPE);
     }

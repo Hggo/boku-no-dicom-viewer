@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Http } from '../app.module';
 import { AxiosInstance } from 'axios';
+import { TagsOrth } from '../interface/orthanc/TagsOrth';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
 import Serie from '../model/Serie';
-import { TagsOrth } from '../interface/orthanc/TagsOrth';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudyService {
-
   constructor(private http: AxiosInstance) { }
-
   getDetailsStudies(): Promise<Study[]> {
     return this.http.post('tools/find', {
                           Level: 'Study',
@@ -38,9 +35,7 @@ export class StudyService {
   }
 
   getTags(instance: Instance): Promise<TagsOrth> {
-    return this.http.get('/instances/' + instance.id + '/tags').then(res => {
-      return res.data;
-    });
+    return this.http.get('/instances/' + instance.id + '/tags').then(res => res.data);
   }
 
   getPixelData(instance: Instance, frame: number): Promise<Instance> {

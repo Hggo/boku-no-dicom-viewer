@@ -1,11 +1,8 @@
-import { DicomToolbarButton } from './generic/DicomToolbarButton';
 import { DicomViewer } from '../../DicomViewer';
 import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
-import { MouseWheelListener } from '../../../utils/MouseWheelListener';
 import { ScrollButton } from './generic/ScroolButton';
 
 export class ZoomButton extends ScrollButton {
-
     constructor(dicomViewer: DicomViewer, selecionar: Function) {
         super(faSearchPlus, dicomViewer, selecionar);
     }

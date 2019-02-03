@@ -1,6 +1,6 @@
 import { DicomViewer } from '../objects/DicomViewer';
-import Instance from '../model/Instance';
 import { CanvasImageData } from './CanvasImageData';
+import Instance from '../model/Instance';
 import * as THREE from 'three';
 
 export class DrawCanvas {
@@ -8,7 +8,6 @@ export class DrawCanvas {
         const ima = (new CanvasImageData(instance, frameIndex)).imageData;
         const texture = new THREE.DataTexture(ima, instance.cols, instance.rows, THREE.RGBAFormat);
         texture.needsUpdate = true;
-
         dicomViewer.initViewer(instance, texture);
     }
 }

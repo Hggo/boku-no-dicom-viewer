@@ -1,10 +1,8 @@
 import { DicomViewer } from '../../DicomViewer';
-import { faAdjust } from '@fortawesome/free-solid-svg-icons';
 import { DicomToolbarButton } from './generic/DicomToolbarButton';
 import Window from '../../../model/Window';
 
 export class ApplyLutButton extends DicomToolbarButton {
-
     constructor(dicomViewer: DicomViewer, private window: Window) {
         super(null, dicomViewer, null, DicomToolbarButton.APPLYONCLICKTYPE);
         this.title = window.description;

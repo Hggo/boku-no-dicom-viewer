@@ -1,23 +1,17 @@
 export default class ViewportAnnotations {
-
     public ww: number;
     public wc: number;
-    private _zoom: number;
     public patientName: String;
     public institutionName: String;
     public totalFrames: number;
     public indexFrames: number;
+    public zoom: number = 1;
 
     constructor () {
-         this._zoom = 1;
     }
 
-    get zoom(): number {
-        return Math.ceil(this._zoom * 100) / 100;
-    }
-
-    set zoom(zoom: number) {
-        this._zoom = zoom;
+    get currentZoom(): number {
+        return Math.ceil(this.zoom * 100) / 100;
     }
 
     get frame (): String {

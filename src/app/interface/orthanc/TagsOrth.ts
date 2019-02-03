@@ -1,11 +1,11 @@
 export interface TagsOrth {
     '0028,0010': TagValue;
     '0028,0011': TagValue;
-    '0028,1050': TagValue; // wc
-    '0028,1051': TagValue; // ww
-    '0028,0103': TagValue; // Pixel Representation
-    '0028,0100': TagValue; // bits alocated
-    '0028,0004': TagValue; // photo inter
+    '0028,1050': TagValue;
+    '0028,1051': TagValue;
+    '0028,0103': TagValue;
+    '0028,0100': TagValue;
+    '0028,0004': TagValue;
     '5200,9229': SharedFunctionalGroupsSequence;
 }
 

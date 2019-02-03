@@ -4,12 +4,10 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { DicomViewer } from '../../../DicomViewer';
 
 export abstract class MouseClickAndDragButton extends DicomToolbarButton {
-
+    protected mouseListener: MouseListener;
     constructor (icon: IconDefinition, dicomViewer: DicomViewer, selecionar: Function, type: Number) {
         super(icon, dicomViewer, selecionar, DicomToolbarButton.CLICKTYPE);
     }
-
-    protected mouseListener: MouseListener;
 
     protected treatDrag = function (deltaX: number, deltaY: number) {
         throw new Error('Not implemented');
