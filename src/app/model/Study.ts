@@ -2,15 +2,15 @@ import { StudyOrth } from 'src/app/interface/orthanc/StudyOrth';
 import Serie from './Serie';
 
 export default class Study {
-    public id: String;
-    public institutionName: String;
-    public referringPhysicianName: String;
-    public studyDate: String;
-    public studyDescription: String;
-    public studyInstanceUID: String;
-    public studyTime: String;
+    public id: string;
+    public institutionName: string;
+    public referringPhysicianName: string;
+    public studyDate: string;
+    public studyDescription: string;
+    public studyInstanceUID: string;
+    public studyTime: string;
     public numberSeries: Number;
-    public patientName: String;
+    public patientName: string;
     public series: Serie[];
 
     constructor(study: StudyOrth) {

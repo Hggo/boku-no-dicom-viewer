@@ -1,21 +1,21 @@
 export interface SerieOrth {
-    ID: String;
-    Instances: String[];
-    ParentStudy: String;
-    Type: String;
+    ID: string;
+    Instances: string[];
+    ParentStudy: string;
+    Type: string;
     MainDicomTags: MainDicomTags;
 }
 
 interface MainDicomTags {
-    ContrastBolusAgent: String;
-    ImageOrientationPatient: String;
-    Manufacturer: String;
-    Modality: String;
-    OperatorsName: String;
-    ProtocolName: String;
-    SeriesDate: String;
-    SeriesInstanceUID: String;
-    SeriesNumber: String;
-    SeriesTime: String;
-    StationName: String;
+    ContrastBolusAgent: string;
+    ImageOrientationPatient: string;
+    Manufacturer: string;
+    Modality: string;
+    OperatorsName: string;
+    ProtocolName: string;
+    SeriesDate: string;
+    SeriesInstanceUID: string;
+    SeriesNumber: string;
+    SeriesTime: string;
+    StationName: string;
 }

@@ -234,6 +234,8 @@ export interface TagsSimpleOrth {
    VmaMod: string;
    VmaPhase: string;
    WindowValue: string;
+   WindowCenter: string;
+   WindowWidth: string;
    XRayTubeCurrent: string;
    XrayChain: string;
    XrayOffPosition: string;

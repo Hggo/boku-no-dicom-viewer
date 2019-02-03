@@ -1,22 +1,22 @@
 export interface StudyOrth {
-    ID: String;
-    Series: String[];
-    Type: String;
+    ID: string;
+    Series: string[];
+    Type: string;
     MainDicomTags: StudyMainDicomTags;
     PatientMainDicomTags: PatientMainDicomTags;
 }
 
 interface StudyMainDicomTags {
-    AccessionNumber: String;
-    StudyDate: String;
-    StudyDescription: String;
-    StudyID: String;
-    StudyInstanceUID: String;
-    StudyTime: String;
-    InstitutionName: String;
-    ReferringPhysicianName: String;
+    AccessionNumber: string;
+    StudyDate: string;
+    StudyDescription: string;
+    StudyID: string;
+    StudyInstanceUID: string;
+    StudyTime: string;
+    InstitutionName: string;
+    ReferringPhysicianName: string;
 }
 
 interface PatientMainDicomTags {
-    PatientName: String;
+    PatientName: string;
 }

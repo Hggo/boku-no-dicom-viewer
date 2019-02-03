@@ -1,49 +1,37 @@
 import { Injectable } from '@angular/core';
 import { AxiosInstance } from 'axios';
-import { TagsOrth } from '../interface/orthanc/TagsOrth';
+import { study, seriesFromStudy, instancesFromSerie, pixelData, tags } from './queries/study';
+import { TagsSimpleOrth } from '../interface/orthanc/TagsSimpleOrth';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
 import Serie from '../model/Serie';
+import BaseService from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudyService {
-  constructor(private http: AxiosInstance) { }
+export class StudyService extends BaseService {
+  constructor(http: AxiosInstance) { 
+    super(http);
+  }
+  
   getDetailsStudies(): Promise<Study[]> {
-    return this.http.post('tools/find', {
-                          Level: 'Study',
-                          Expand: true,
-                          Query: {}})
-                    .then(res => res.data.map(study => new Study(study)));
+    return this.post(study, Study);
   }
 
   getSeriesFromStudy(study: Study): Promise<Serie[]> {
-    return this.http.post('tools/find', {
-                          Level: 'Series',
-                          Expand: true,
-                          Query: {'StudyInstanceUID': study.studyInstanceUID}})
-                    .then(res => res.data.map(serie => new Serie(serie)));
+    return this.post(seriesFromStudy(study.studyInstanceUID), Serie);
   }
 
   getInstancesFromSerie(serie: Serie): Promise<Instance[]> {
-    return this.http.post('tools/find', {
-                          Level: 'Instance',
-                          Expand: true,
-                          Query: {'SeriesInstanceUID': serie.ID}})
-                    .then(res => res.data.map(instance => new Instance(instance)));
+    return this.post(instancesFromSerie(serie.ID), Instance);
   }
 
-  getTags(instance: Instance): Promise<TagsOrth> {
-    return this.http.get('/instances/' + instance.id + '/tags').then(res => res.data);
+  getTags(instance: Instance): Promise<TagsSimpleOrth> {
+    return this.get(tags(instance.id));
   }
 
-  getPixelData(instance: Instance, frame: number): Promise<Instance> {
-    return this.http.get('/instances/' + instance.id + '/frames/' + frame + '/raw',  {
-      responseType: 'arraybuffer'})
-                    .then(res => {
-                      instance.frames[frame].pixelData = res.data;
-                      return instance;
-                    });
+  getPixelData(instance: Instance, frame: number): Promise<ArrayBuffer> {
+    return this.get(pixelData(instance.id, frame));
   }
 }

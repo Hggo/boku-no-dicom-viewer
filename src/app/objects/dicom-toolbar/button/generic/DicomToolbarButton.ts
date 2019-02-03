@@ -11,7 +11,7 @@ export class DicomToolbarButton {
     public active: boolean;
     public class: string;
     public buttons: DicomToolbarButton[];
-    public title: String;
+    public title: string;
     public selectable: Boolean;
 
     constructor(public icon: IconDefinition, protected dicomViewer: DicomViewer, private selecionar: Function, public type: Number) {

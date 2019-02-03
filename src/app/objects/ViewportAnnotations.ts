@@ -1,8 +1,8 @@
 export default class ViewportAnnotations {
     public ww: number;
     public wc: number;
-    public patientName: String;
-    public institutionName: String;
+    public patientName: string;
+    public institutionName: string;
     public totalFrames: number;
     public indexFrames: number;
     public zoom: number = 1;
@@ -14,7 +14,7 @@ export default class ViewportAnnotations {
         return Math.ceil(this.zoom * 100) / 100;
     }
 
-    get frame (): String {
+    get frame (): string {
         return this.indexFrames + 1 + '/' + this.totalFrames;
     }
 }
