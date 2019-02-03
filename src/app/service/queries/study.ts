@@ -35,7 +35,7 @@ export const instancesFromSerie = (serieId: string): HttpQuery  => {
 
 export const tags = (instanceId: string): HttpQuery  => {
     return {
-        Url: `/instances/${instanceId}/tags`,
+        Url: `/instances/${instanceId}/tags?simplify=true`,
         body: {}
     }
 }

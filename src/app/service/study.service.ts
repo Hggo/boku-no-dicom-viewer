@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AxiosInstance } from 'axios';
-import { TagsOrth } from '../interface/orthanc/TagsOrth';
 import { study, seriesFromStudy, instancesFromSerie, pixelData, tags } from './queries/study';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
 import Serie from '../model/Serie';
 import BaseService from './base.service';
+import { TagsSimpleOrth } from '../interface/orthanc/TagsSimpleOrth';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class StudyService extends BaseService {
                .then(res => this.listToClass(res, Instance));
   }
 
-  getTags(instance: Instance): Promise<TagsOrth> {
+  getTags(instance: Instance): Promise<TagsSimpleOrth> {
     return this.get(tags(instance.id)).then(res => res.data);
   }
 
