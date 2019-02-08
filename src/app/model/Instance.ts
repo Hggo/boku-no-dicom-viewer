@@ -1,10 +1,10 @@
 import { InstanceOrth } from 'src/app/interface/orthanc/InstanceOrth';
+import { TagsSimpleOrth } from '../interface/orthanc/TagsSimpleOrth';
 import Window from './Window';
 import Frame from './Frame';
-import { TagsSimpleOrth } from '../interface/orthanc/TagsSimpleOrth';
 
 export default class Instance {
-    public indexInSeries: Number;
+    public indexInSeries: number;
     public id: string;
     public ww: number;
     public wc: number;
@@ -38,7 +38,7 @@ export default class Instance {
             this.frames.push(new Frame(i));
         }
     }
-    
+
     public initTags(tags: TagsSimpleOrth) {
         this.windows = [];
         if (tags.WindowCenter) {
@@ -47,10 +47,10 @@ export default class Instance {
             this.windows.push(new Window(this.ww, this.wc, 'Window 1'));
             this.hasWindow = true;
         }
-        try {
+        if (tags.RescaleIntercept !== undefined && tags.RescaleIntercept !== '') {
             this.rescaleIntercept = Number(tags.RescaleIntercept);
             this.rescaleSlope = Number(tags.RescaleSlope);
-        } catch (err) {
+        } else {
             this.rescaleSlope = 1;
             this.rescaleIntercept = 0;
         }
@@ -58,6 +58,6 @@ export default class Instance {
         this.rows = Number(tags.Rows);
         this.pixelRepresentation = Number(tags.PixelRepresentation);
         this.bitsAlocated = Number(tags.BitsAllocated);
-        this.photometricInterpretation = Number(tags.PhotometricInterpretation);
+        this.photometricInterpretation = (tags.PhotometricInterpretation === 'MONOCHROME2') ? 1 : 0;
     }
 }

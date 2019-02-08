@@ -27,28 +27,24 @@ export class ViewportComponent implements OnInit {
     this.resolveThumbnail(this.study.series[0], this.study.series[0].Instances[0], 0, 0);
   }.bind(this);
 
-  private updateInstances = function(instance: Instance, serieN: number, instN: number, frameN: number) {
-      if (this.study.series[serieN].Instances[instN] === undefined) {
-        this.study.series[serieN].Instances[instN] = instance;
-      } else {
-        this.study.series[serieN].Instances[instN].frames[frameN] = instance.frames[frameN];
-      }
-      if (frameN === 0) {
-        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN], serieN, instN);
-      }
-  }.bind(this);
-
   ngOnInit() {
     this.thumbnails = [];
-    const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas, this.updateInstances);
+    const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas);
     const webglDiv = <HTMLDivElement> document.getElementById('webgl');
     this.dicomViewer = new DicomViewer(webglDiv, this.study);
-    studyHelper.prepareStudy();
+    studyHelper.loadStudy(this.study, study => {
+      this.initThumbs();
+      studyHelper.loadSerie(this.study.series[0], serie => {
+        this.study.series[0] = serie;
+        this.drag(serie.thumb);
+        this.drop();
+      });
+    });
   }
 
-  public resolveThumbnail(serie: Serie, instance: Instance, serieN, instN) {
-    const src = new CanvasImageData(instance, 0).canvas.toDataURL('image/png');
-    this.thumbnails.push(new Thumbnail(src, serie.Modality, serieN, instN));
+  private initThumbs () {
+    this.thumbnails = [];
+    this.study.series.forEach(serie => this.thumbnails.push(serie.thumb));
   }
 
   drag (thumbnail: Thumbnail) {
@@ -57,7 +53,7 @@ export class ViewportComponent implements OnInit {
     this.dicomViewer.frameIndex = 0;
   }
 
-  drop (evt) {
+  drop (evt?) {
     this.dicomViewer.render();
   }
 

@@ -49,14 +49,7 @@ export const pixelData = (instanceId: string, frame: number): HttpQuery  => {
     }
 }
 
-export const preview = (instanceUid: string, frame: number): HttpQuery  => {
-    return {
-        Url: `/instances/${instanceUid}/frames/${frame}/raw`,
-        body: {
-            responseType: 'blob'
-        }
-    }
-}
+export const preview = (instanceUid: string, frame: number): string => `/orthanc/instances/${instanceUid}/frames/${frame}/preview`;
 
 export interface HttpQuery {
     Url: string;

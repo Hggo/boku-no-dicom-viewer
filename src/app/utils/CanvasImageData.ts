@@ -3,15 +3,8 @@ import Instance from '../model/Instance';
 export class CanvasImageData {
     private pixelDataUInt;
     private pixelData;
-    public preview: ImageData;
-    public canvas: HTMLCanvasElement;
 
     constructor(private instance: Instance, frameIndex: number) {
-        this.canvas = document.createElement('canvas');
-        this.canvas.width = instance.cols;
-        this.canvas.height = instance.rows;
-        const ctx = this.canvas.getContext('2d');
-        this.preview = ctx.createImageData(instance.cols, instance.rows);
         let counter = 0;
         const pixelRepresentation = instance.pixelRepresentation;
         const bitsAlocated = instance.bitsAlocated;
@@ -34,10 +27,6 @@ export class CanvasImageData {
             this.pixelData[counter++] = lum;
             this.pixelData[counter++] = 255;
         }
-        for (let index = 0; index < this.pixelData.length; index++) {
-            this.preview.data[index] = this.pixelData[index];
-        }
-        ctx.putImageData(this.preview, 0, 0);
     }
 
     private applyPhotometricInterpretation(pixel: number): number {

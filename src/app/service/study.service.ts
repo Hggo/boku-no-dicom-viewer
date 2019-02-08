@@ -35,9 +35,8 @@ export class StudyService extends BaseService {
     return this.get(pixelData(instance.id, frame));
   }
 
-  getPreview(instanceUid: string, frame: number): Promise<String> {
-    return new Promise((resolve, reject) => {
-      return this.get(preview(instanceUid, frame));
-    });
+
+  getPreview(instanceUid: string, frame: number): string {
+      return preview(instanceUid, frame);
   }
 }
