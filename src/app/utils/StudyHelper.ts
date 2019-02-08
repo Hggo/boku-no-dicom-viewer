@@ -42,8 +42,8 @@ export default class StudyHelper {
         for (let j = 0; j < instances.length; j++) {
             this.resolveTags(instances[j])
                 .then(insttags => {
-                    let instance = this.study.series[serieN].Instances[j];
-                    instance.initTags(insttags);;
+                    const instance = this.study.series[serieN].Instances[j];
+                    instance.initTags(insttags);
                     for (let k = 0; k < instance.numberOfFrames; k++) {
                         const frame = this.study.series[serieN].Instances[j].frames[k];
                         if (!frame || !frame.pixelData) {
