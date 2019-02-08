@@ -14,9 +14,9 @@ import Thumbnail from '../../../objects/Thumbnail';
   styleUrls: ['./viewport.component.css']
 })
 export class ViewportComponent implements OnInit {
+  @Input() study: Study;
   constructor(private studyService: StudyService) { }
   public dicomViewer: DicomViewer;
-  @Input() study: Study;
   private leftToolBox: HTMLDivElement;
   public thumbnails: Thumbnail[];
 

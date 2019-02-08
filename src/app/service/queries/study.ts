@@ -13,12 +13,12 @@ export const seriesFromStudy = (studyInstanceUID: string): HttpQuery  => {
         body: {
             Level: 'Series',
             Expand: true,
-            Query: { 
-                'StudyInstanceUID': studyInstanceUID 
+            Query: {
+                'StudyInstanceUID': studyInstanceUID,
             }
         }
-    }
-}
+    };
+};
 
 export const instancesFromSerie = (serieId: string): HttpQuery  => {
     return {
@@ -45,6 +45,15 @@ export const pixelData = (instanceId: string, frame: number): HttpQuery  => {
         Url: `/instances/${instanceId}/frames/${frame}/raw`,
         body: {
             responseType: 'arraybuffer'
+        }
+    }
+}
+
+export const preview = (instanceUid: string, frame: number): HttpQuery  => {
+    return {
+        Url: `/instances/${instanceUid}/frames/${frame}/raw`,
+        body: {
+            responseType: 'blob'
         }
     }
 }

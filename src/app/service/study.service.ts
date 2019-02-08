@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AxiosInstance } from 'axios';
-import { study, seriesFromStudy, instancesFromSerie, pixelData, tags } from './queries/study';
+import { study, seriesFromStudy, instancesFromSerie, pixelData, tags, preview } from './queries/study';
 import { TagsSimpleOrth } from '../interface/orthanc/TagsSimpleOrth';
 import Study from '../model/Study';
 import Instance from '../model/Instance';
@@ -11,16 +11,16 @@ import BaseService from './base.service';
   providedIn: 'root'
 })
 export class StudyService extends BaseService {
-  constructor(http: AxiosInstance) { 
+  constructor(http: AxiosInstance) {
     super(http);
   }
-  
+
   getDetailsStudies(): Promise<Study[]> {
     return this.post(study, Study);
   }
 
-  getSeriesFromStudy(study: Study): Promise<Serie[]> {
-    return this.post(seriesFromStudy(study.studyInstanceUID), Serie);
+  getSeriesFromStudy(studyToGet: Study): Promise<Serie[]> {
+    return this.post(seriesFromStudy(studyToGet.studyInstanceUID), Serie);
   }
 
   getInstancesFromSerie(serie: Serie): Promise<Instance[]> {
@@ -33,5 +33,11 @@ export class StudyService extends BaseService {
 
   getPixelData(instance: Instance, frame: number): Promise<ArrayBuffer> {
     return this.get(pixelData(instance.id, frame));
+  }
+
+  getPreview(instanceUid: string, frame: number): Promise<String> {
+    return new Promise((resolve, reject) => {
+      return this.get(preview(instanceUid, frame));
+    });
   }
 }
