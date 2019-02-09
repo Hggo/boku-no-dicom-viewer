@@ -16,9 +16,10 @@ export default class StudyHelper {
             study.series.forEach(serie => {
                 this.studyService.getInstancesFromSerie(serie).then(instances => {
                     serie.Instances = instances;
+                    serie.SeriesNumber = loaded;
                     const firstInstance = instances[0];
                     const url: string = this.studyService.getPreview(firstInstance.id, 0);
-                    const thumb = new Thumbnail(url, serie.Modality, 0, 0);
+                    const thumb = new Thumbnail(url, serie.Modality, serie.SeriesNumber, 0);
                     serie.thumb = thumb;
                     if (++loaded === series.length) {
                          loadedMetadata(study);

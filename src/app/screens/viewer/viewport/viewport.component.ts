@@ -14,6 +14,7 @@ import Thumbnail from '../../../objects/Thumbnail';
   styleUrls: ['./viewport.component.css']
 })
 export class ViewportComponent implements OnInit {
+  studyHelper: StudyHelper;
   @Input() study: Study;
   constructor(private studyService: StudyService) { }
   public dicomViewer: DicomViewer;
@@ -24,20 +25,18 @@ export class ViewportComponent implements OnInit {
     this.study = study;
     this.leftToolBox = <HTMLDivElement> document.getElementById('leftToolbox');
     requestAnimationFrame(this.dicomViewer.render);
-    this.resolveThumbnail(this.study.series[0], this.study.series[0].Instances[0], 0, 0);
   }.bind(this);
 
   ngOnInit() {
     this.thumbnails = [];
-    const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas);
+    this.studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas);
     const webglDiv = <HTMLDivElement> document.getElementById('webgl');
     this.dicomViewer = new DicomViewer(webglDiv, this.study);
-    studyHelper.loadStudy(this.study, study => {
+    this.studyHelper.loadStudy(this.study, study => {
       this.initThumbs();
-      studyHelper.loadSerie(this.study.series[0], serie => {
-        this.study.series[0] = serie;
+      this.studyHelper.loadSerie(this.study.series[0], serie => {
         this.drag(serie.thumb);
-        this.drop();
+        this.applyLoad();
       });
     });
   }
@@ -54,6 +53,10 @@ export class ViewportComponent implements OnInit {
   }
 
   drop (evt?) {
+    this.studyHelper.loadSerie(this.study.series[this.dicomViewer.serieIndex], serie => this.applyLoad());
+  }
+
+  private applyLoad () {
     this.dicomViewer.render();
   }
 
