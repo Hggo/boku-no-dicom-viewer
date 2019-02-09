@@ -2,7 +2,7 @@ export interface InstanceOrth {
     ID: string;
     FileSize: Number;
     FileUuid: string;
-    IndexInSeries: Number;
+    IndexInSeries: number;
     ParentSeries: string;
     Type: string;
     MainDicomTags: InstanceMainDicomTags;

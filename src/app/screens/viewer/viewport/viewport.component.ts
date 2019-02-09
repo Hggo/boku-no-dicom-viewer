@@ -14,9 +14,10 @@ import Thumbnail from '../../../objects/Thumbnail';
   styleUrls: ['./viewport.component.css']
 })
 export class ViewportComponent implements OnInit {
+  studyHelper: StudyHelper;
+  @Input() study: Study;
   constructor(private studyService: StudyService) { }
   public dicomViewer: DicomViewer;
-  @Input() study: Study;
   private leftToolBox: HTMLDivElement;
   public thumbnails: Thumbnail[];
 
@@ -24,44 +25,38 @@ export class ViewportComponent implements OnInit {
     this.study = study;
     this.leftToolBox = <HTMLDivElement> document.getElementById('leftToolbox');
     requestAnimationFrame(this.dicomViewer.render);
-    this.resolveThumbnail(this.study.series[0], this.study.series[0].Instances[0], 0, 0);
-  }.bind(this);
-
-  private updateInstances = function(instance: Instance, serieN: number, instN: number, frameN: number) {
-      if (this.study.series[serieN].Instances[instN] === undefined) {
-        this.study.series[serieN].Instances[instN] = instance;
-      } else {
-        this.study.series[serieN].Instances[instN].frames[frameN] = instance.frames[frameN];
-      }
-      if (frameN === 0) {
-        this.resolveThumbnail(this.study.series[serieN], this.study.series[serieN].Instances[instN], serieN, instN);
-      }
   }.bind(this);
 
   ngOnInit() {
     this.thumbnails = [];
-    const studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas, this.updateInstances);
+    this.studyHelper = new StudyHelper(this.study, this.studyService, this.initCanvas);
     const webglDiv = <HTMLDivElement> document.getElementById('webgl');
     this.dicomViewer = new DicomViewer(webglDiv, this.study);
-    studyHelper.prepareStudy();
+    this.studyHelper.loadStudy(this.study, study => {
+      this.initThumbs();
+      this.loadSerie(0);
+    });
   }
 
-  public resolveThumbnail(serie: Serie, instance: Instance, serieN, instN) {
-    const src = new CanvasImageData(instance, 0).canvas.toDataURL('image/png');
-    this.thumbnails.push(new Thumbnail(src, serie.Modality, serieN, instN));
+  private initThumbs () {
+    this.thumbnails = [];
+    this.study.series.forEach(serie => this.thumbnails.push(serie.thumb));
   }
 
-  drag (thumbnail: Thumbnail) {
-    this.dicomViewer.serieIndex = thumbnail.serieIndex;
-    this.dicomViewer.instanceIndex = thumbnail.instanceIndex;
-    this.dicomViewer.frameIndex = 0;
+  click (thumbnail: Thumbnail) {
+    this.loadSerie(thumbnail.serieIndex);
   }
 
-  drop (evt) {
+  private loadSerie (index: number) {
+    this.studyHelper.loadSerie(this.study.series[index], serie => {
+        this.dicomViewer.serieIndex = index;
+        this.dicomViewer.instanceIndex = 0;
+        this.dicomViewer.frameIndex = 0;
+        this.applyLoad();
+    });
+  }
+
+  private applyLoad () {
     this.dicomViewer.render();
-  }
-
-  allowDrop(ev) {
-    ev.preventDefault();
   }
 }

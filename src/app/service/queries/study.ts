@@ -13,12 +13,12 @@ export const seriesFromStudy = (studyInstanceUID: string): HttpQuery  => {
         body: {
             Level: 'Series',
             Expand: true,
-            Query: { 
-                'StudyInstanceUID': studyInstanceUID 
+            Query: {
+                'StudyInstanceUID': studyInstanceUID,
             }
         }
-    }
-}
+    };
+};
 
 export const instancesFromSerie = (serieId: string): HttpQuery  => {
     return {
@@ -48,6 +48,8 @@ export const pixelData = (instanceId: string, frame: number): HttpQuery  => {
         }
     }
 }
+
+export const preview = (instanceUid: string, frame: number): string => `/orthanc/instances/${instanceUid}/frames/${frame}/preview`;
 
 export interface HttpQuery {
     Url: string;
