@@ -30,10 +30,10 @@ export class DicomToolbarButton {
     }
 
     public treatClick() {
-        throw new Error('Not implemented');
+        // throw new Error('Not implemented');
     }
 
     public removeListeners() {
-        throw new Error('Not implemented');
+        // throw new Error('Not implemented');
     }
 }

@@ -1,8 +1,8 @@
 import Instance from '../model/Instance';
 
 export class CanvasImageData {
-    private pixelDataUInt;
-    private pixelData;
+    public pixelDataUInt;
+    public pixelData;
 
     constructor(private instance: Instance, frameIndex: number) {
         let counter = 0;
@@ -20,7 +20,7 @@ export class CanvasImageData {
         }
         this.pixelData = new Uint8Array(instance.cols * instance.rows * 4);
         for (let index = 0; index < this.pixelDataUInt.length; index++) {
-            let lum = this.applyWindowIfExistent(this.applyRescale(this.pixelDataUInt[index]), instance.ww, instance.wc);
+            let lum = this.applyRescale(this.pixelDataUInt[index]);
             lum = this.applyPhotometricInterpretation(lum);
             this.pixelData[counter++] = lum;
             this.pixelData[counter++] = lum;

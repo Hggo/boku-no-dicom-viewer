@@ -3,6 +3,7 @@ import Instance from '../model/Instance';
 import Study from '../model/Study';
 import ViewportAnnotations from './ViewportAnnotations';
 import * as THREE from 'three';
+import { vertexShader, fragmentShader } from "src/app/cg/shaders";
 
 export class DicomViewer {
     public annotations: ViewportAnnotations;
@@ -81,11 +82,22 @@ export class DicomViewer {
         this.annotations = annotations;
     }
 
-    public initViewer(instance: Instance, texture: THREE.Texture) {
+    public initViewer(instance: Instance, texture: any) {
         this.initAnnotations(instance);
         this.instance = instance;
         this.plane = new THREE.PlaneGeometry(instance.cols, instance.rows);
-        const material = new THREE.MeshBasicMaterial({ map: texture });
+        // const material = new THREE.MeshBasicMaterial({ map: texture });
+        const uniforms = {
+            center: instance.windows[0].wc,
+            width: instance.windows[0].ww,
+            tDiffuse1: texture
+        };
+        const material = new THREE.ShaderMaterial( {
+            uniforms: uniforms,
+            vertexShader: vertexShader,
+            fragmentShader: fragmentShader
+        });
+
         texture.needsUpdate = true;
         const mesh = new THREE.Mesh(this.plane, material);
         mesh.scale.y = -1;
