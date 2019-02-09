@@ -5,13 +5,13 @@
     </div>
 
     <div id="leftToolbox">
-        <div *ngFor="let thumbnail of thumbnails" draggable="true" (dragstart)="drag(thumbnail)">
+        <div *ngFor="let thumbnail of thumbnails" (click)="click(thumbnail)">
             <img class="thumbnail" [src]="thumbnail.src"/>
             <div class="seriesDiscription">{{ thumbnail.title }}</div>
         </div>
     </div>
 
-    <div id="webgl" (drop)="drop($event)" (dragover)="allowDrop($event)">
+    <div id="webgl">
         <div id="annotations" *ngIf="dicomViewer.annotations">
             <div class="unselectable tag-patient-name">
                 {{ dicomViewer.annotations.patientName }}

@@ -34,10 +34,7 @@ export class ViewportComponent implements OnInit {
     this.dicomViewer = new DicomViewer(webglDiv, this.study);
     this.studyHelper.loadStudy(this.study, study => {
       this.initThumbs();
-      this.studyHelper.loadSerie(this.study.series[0], serie => {
-        this.drag(serie.thumb);
-        this.applyLoad();
-      });
+      this.loadSerie(0);
     });
   }
 
@@ -46,21 +43,20 @@ export class ViewportComponent implements OnInit {
     this.study.series.forEach(serie => this.thumbnails.push(serie.thumb));
   }
 
-  drag (thumbnail: Thumbnail) {
-    this.dicomViewer.serieIndex = thumbnail.serieIndex;
-    this.dicomViewer.instanceIndex = thumbnail.instanceIndex;
-    this.dicomViewer.frameIndex = 0;
+  click (thumbnail: Thumbnail) {
+    this.loadSerie(thumbnail.serieIndex);
   }
 
-  drop (evt?) {
-    this.studyHelper.loadSerie(this.study.series[this.dicomViewer.serieIndex], serie => this.applyLoad());
+  private loadSerie (index: number) {
+    this.studyHelper.loadSerie(this.study.series[index], serie => {
+        this.dicomViewer.serieIndex = index;
+        this.dicomViewer.instanceIndex = 0;
+        this.dicomViewer.frameIndex = 0;
+        this.applyLoad();
+    });
   }
 
   private applyLoad () {
     this.dicomViewer.render();
-  }
-
-  allowDrop(ev) {
-    ev.preventDefault();
   }
 }
