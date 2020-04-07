@@ -1,5 +1,5 @@
 # Boku No Dicom Viewer
-
+### This is not meant to be used for diagnostic in any way
 ![Viewer demo](https://raw.githubusercontent.com/Hggo/boku-no-dicom-viewer/master/demo.gif)
 
 This viewer consumes Orthanc rest api, it may be necessary to run it in serve folders or in some other way to bypass Orthanc's CORS restrictions:
